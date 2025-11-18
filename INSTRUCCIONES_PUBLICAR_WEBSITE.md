@@ -1,6 +1,6 @@
 # 🌐 INSTRUCCIONES - CÓMO PUBLICAR EL WEBSITE DE JIMY
 
-El archivo `jimy_agtech_website.html` es un website **completamente independiente** (HTML + CSS + JavaScript en un archivo). Puedes publicarlo GRATIS en minutos con cualquiera de estas opciones.
+El archivo principal ahora es `index.html` (antes `jimy_agtech_website.html`). Es un website **completamente independiente** (HTML + CSS + JavaScript en un archivo). Puedes publicarlo GRATIS en minutos con cualquiera de estas opciones.
 
 ---
 
@@ -20,8 +20,8 @@ El archivo `jimy_agtech_website.html` es un website **completamente independient
 
 ### Paso 3: Subir archivo
 1. En el nuevo repositorio, click "Add file" → "Upload files"
-2. Arrastra o selecciona: `jimy_agtech_website.html`
-3. Renombra a: `index.html` (importante!)
+2. Arrastra o selecciona: `index.html` (antes `jimy_agtech_website.html`)
+3. Verifica que se llame `index.html` (importante!)
 4. Click: "Commit changes"
 
 ### Paso 4: Activar GitHub Pages
@@ -76,7 +76,7 @@ Si tienes hosting web con acceso FTP:
 
 1. Abre FileZilla (o tu cliente FTP)
 2. Conéctate a tu servidor
-3. Copia `jimy_agtech_website.html` → renómbralo a `index.html`
+3. Copia `index.html` (antes `jimy_agtech_website.html`) → renómbralo a `index.html` si tu hosting lo requiere
 4. Sube a carpeta `public_html` (o root)
 
 Listo! Tu sitio estará en: **tudominio.com/**
@@ -87,7 +87,7 @@ Listo! Tu sitio estará en: **tudominio.com/**
 
 Si solo quieres compartir el archivo para que otros lo abran en su computadora:
 
-1. Copia `jimy_agtech_website.html` a tu desktop
+1. Copia `index.html` (antes `jimy_agtech_website.html`) a tu desktop
 2. Renómbralo a algo más amigable: `Jimy-AgTech-Portfolio.html`
 3. Comparte vía email, WhatsApp, Google Drive, etc.
 4. Otros abren con doble-click en su navegador
@@ -108,7 +108,7 @@ Si solo quieres compartir el archivo para que otros lo abran en su computadora:
 
 ## 🔧 SI NECESITAS HACER CAMBIOS
 
-El archivo `jimy_agtech_website.html` es texto plano. Puedes:
+El archivo `index.html` (antes `jimy_agtech_website.html`) es texto plano. Puedes:
 
 1. Abrir con cualquier editor (Notepad, VS Code, Sublime)
 2. Hacer cambios (ej. cambiar email, agregar enlaces)
@@ -120,7 +120,7 @@ El archivo `jimy_agtech_website.html` es texto plano. Puedes:
 
 ## 📧 PERSONALIZACIÓN QUICK (30 segundos)
 
-Abre `jimy_agtech_website.html` con editor de texto y busca/reemplaza:
+Abre `index.html` (antes `jimy_agtech_website.html`) con editor de texto y busca/reemplaza:
 
 | Busca | Reemplaza |
 |-------|-----------|
@@ -205,4 +205,3 @@ R: No, está en internet. Pero si descargas HTML, funciona sin internet en local
 ---
 
 Cualquier pregunta sobre publicación, escribe arriba. El sitio está 100% listo para ir live! 🚀
-
