@@ -121,6 +121,12 @@
         .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-top: 2rem; }
         .feature-card { background: rgba(255,255,255,0.95); border-radius: 18px; padding: 1.5rem; border: 1px solid rgba(15,30,21,0.08); display: flex; flex-direction: column; gap: 0.7rem; }
         .feature-card span { font-size: 1.8rem; }
+        .design-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; align-items: stretch; }
+        .component-list { background: rgba(255,255,255,0.95); border-radius: 18px; padding: 1.5rem; border: 1px solid rgba(15,30,21,0.08); display: flex; flex-direction: column; gap: 0.9rem; }
+        .component-list ul { list-style: none; color: var(--muted); line-height: 1.7; padding-left: 0; }
+        .component-list ul li::before { content: '• '; color: var(--secondary); }
+        .experience-logos { display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap; margin-top: 1.5rem; }
+        .experience-logos img { height: 42px; object-fit: contain; filter: grayscale(20%); background: white; border-radius: 10px; padding: 0.4rem 0.8rem; box-shadow: 0 10px 25px rgba(15,30,21,0.08); }
         .documents-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; }
         .doc-card { padding: 1.75rem; border-radius: 20px; background: var(--card); box-shadow: 0 30px 60px rgba(15,30,21,0.08); display: flex; flex-direction: column; gap: 1rem; border: 1px solid rgba(15,30,21,0.04); }
         .doc-card h3 { font-size: 1.3rem; }
@@ -162,6 +168,8 @@
         textarea { min-height: 120px; resize: vertical; }
         footer { background: #071e15; color: rgba(255,255,255,0.7); padding: 3rem 0 2rem; }
         .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; }
+        .footer-bottom { text-align: center; margin-top: 2.5rem; line-height: 1.8; color: rgba(255,255,255,0.8); }
+        .footer-bottom a { color: var(--accent); text-decoration: none; font-weight: 600; }
         .scroll-to-top {
             position: fixed;
             bottom: 80px;
@@ -196,6 +204,7 @@
             box-shadow: 0 20px 45px rgba(10,35,25,0.35);
             z-index: 999;
         }
+        .chat-launcher.hidden { opacity: 0; pointer-events: none; transform: scale(0.9); }
         .chat-drawer {
             position: fixed;
             top: 0;
@@ -219,6 +228,16 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 1rem;
+        }
+        .chat-header .chat-minimize {
+            background: rgba(255,255,255,0.15);
+            border: none;
+            color: white;
+            padding: 0.4rem 0.9rem;
+            border-radius: 999px;
+            font-weight: 600;
+            cursor: pointer;
         }
         .chat-body {
             flex: 1;
@@ -251,13 +270,14 @@
                 <span>🌱</span>
                 <div>
                     Harvest.AI
-                    <span>Por Jimy · Remote Data Capture</span>
+                    <span>Por Jimmy Fernandez · Remote Data Capture</span>
                 </div>
             </div>
             <ul class="nav-menu" id="navMenu">
                 <li><a href="#home">Inicio</a></li>
                 <li><a href="#about">Fundador</a></li>
                 <li><a href="#project">Proyecto</a></li>
+                <li><a href="#design">Diseño</a></li>
                 <li><a href="#documents">Documentos</a></li>
                 <li><a href="#roadmap">Roadmap</a></li>
                 <li><a href="#gallery">Galería</a></li>
@@ -275,7 +295,7 @@
                     <div class="hero-copy">
                         <p class="eyebrow">Harvest.AI</p>
                         <h1>El dispositivo inteligente que conecta granjas desconectadas</h1>
-                        <p>Harvest.AI combina conectividad híbrida y edge AI para capturar datos agrícolas en tiempo real, incluso donde no llega la fibra. Diseñado por Jimy para crear tracción, IP y evidencia de visa.</p>
+                        <p>Harvest.AI combina conectividad híbrida y edge AI para capturar datos agrícolas en tiempo real, incluso donde no llega la fibra. Diseñado por Jimmy Fernandez para crear tracción, IP y evidencia de visa.</p>
                         <div class="pill-group">
                             <span class="pill">IoT triple enlace</span>
                             <span class="pill">Edge AI</span>
@@ -309,14 +329,18 @@
             <div class="container">
                 <div class="dual-grid section-card">
                     <div>
-                        <p class="eyebrow">Sobre Jimy</p>
+                        <p class="eyebrow">Sobre Jimmy Fernandez</p>
                         <h2>Telecom engineer → fundador de Harvest.AI</h2>
-                        <p>Venezolano con 8 años instalando infraestructura de telecom en South Florida. Experto en RF, resiliencia de redes y despliegues de campo. Ahora lidera Harvest.AI para resolver la desconexión agrícola y crear evidencia para su visa de talento.</p>
+                        <p>Venezolano con más de <strong>15 años en la industria telco</strong>. Lideró despliegues de infraestructura para <strong>Digitel</strong> (Venezuela) y <strong>AT&amp;T</strong> (EE. UU.), especializándose en RF, resiliencia de redes y operaciones de campo. Hoy dirige Harvest.AI para resolver la desconexión agrícola y reforzar su evidencia de talento global.</p>
                         <ul style="list-style:none; margin-top:1rem; color:var(--muted); line-height:1.8;">
                             <li>• Experiencia directa con granjas y climas extremos</li>
                             <li>• Bilingüe, orientado a resultados y a evidencia</li>
                             <li>• Roadmap claro: producto + patente + clientes + visa</li>
                         </ul>
+                        <div class="experience-logos">
+                            <img src="company_logos/Logo_DIGITEL.png" alt="Digitel">
+                            <img src="company_logos/Logo_ATT_rgb_pos.jpg" alt="AT&T">
+                        </div>
                     </div>
                     <div>
                         <div class="feature-card" style="height:100%; justify-content:center; background:rgba(24,166,124,0.12);">
@@ -370,6 +394,38 @@
                             <img class="mesh-diagram" src="clipart_files/Harvest-AI-Prototype-Mesh_Image_qundjlqundjlqund.png" alt="Diagrama Mesh Harvest.AI">
                             <p style="opacity:0.8;">Vista del mesh redundante que asegura cobertura aun si falla un canal.</p>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="design">
+            <div class="container">
+                <p class="eyebrow" style="text-align:center;">Diseño & Componentes</p>
+                <h2>Blueprint Harvest.AI + lista de materiales</h2>
+                <div class="design-grid">
+                    <div class="component-list">
+                        <h3>Componentes críticos</h3>
+                        <p>Basado en <strong>Lista_componentes_HARVESTAI.md</strong>, dividimos el hardware en 7 módulos.</p>
+                        <ul>
+                            <li><strong>Procesamiento:</strong> STM32L476/ESP32-S3 + ARM Cortex-M7 para inferencias.</li>
+                            <li><strong>Triple comunicación:</strong> LoRaWAN (SX1276), satélite Sigfox/Iridium y mesh 2.4 GHz.</li>
+                            <li><strong>Sensores:</strong> Humedad, temperatura, NPK, pH, luz, presión y humedad relativa.</li>
+                            <li><strong>Energía:</strong> Panel solar 40W, LiFePO4 10Ah, reguladores MPPT y DC-DC aislados.</li>
+                            <li><strong>Interfaz:</strong> LCD 2.4", LED status y botón de reset para field engineers.</li>
+                            <li><strong>Carcasa:</strong> ABS/PC IP67 con antenas visibles y conectores Anderson.</li>
+                            <li><strong>Electrónica extra:</strong> ADCs ADS1115, watchdog, protección ESD y hub I2C.</li>
+                        </ul>
+                        <div style="display:flex; flex-wrap:wrap; gap:0.6rem;">
+                            <a class="btn btn-primary" href="web_files/Lista_componentes_HARVESTAI.md" download>Descargar lista</a>
+                            <a class="btn btn-ghost" href="https://nanobanana.ai" target="_blank">Generar renders en NanoBanana</a>
+                        </div>
+                    </div>
+                    <div class="section-card" style="background:white;">
+                        <h3>Esquemático del dispositivo</h3>
+                        <p style="color:var(--muted); margin-bottom:1rem;">Este blueprint muestra la disposición interna/externa del módulo sensor Harvest.AI y sirve de referencia para renders adicionales.</p>
+                        <img src="clipart_files/Harvest-AI-Prototype-_Image_s1ia9hs1ia9hs1ia.png" alt="Esquemático Harvest.AI" style="width:100%; border-radius:18px; border:1px solid rgba(15,30,21,0.08);">
+                        <p style="color:var(--muted); margin-top:0.8rem;">Incluye antenas LoRa/satelitales, panel solar, disipadores y layout de sensores. Ideal para prompts técnicos.</p>
                     </div>
                 </div>
             </div>
@@ -630,7 +686,10 @@
                     </ul>
                 </div>
             </div>
-            <p style="text-align:center; margin-top:2rem;">© 2025 Harvest.AI · Innovación agrícola remota</p>
+            <div class="footer-bottom">
+                <p>2025 - All rights reserved. Jimmy Fernandez</p>
+                <p>This site is powered by <a href="https://startupmiracle.com/" target="_blank" rel="noopener">Startup Miracle</a></p>
+            </div>
         </div>
     </footer>
 
@@ -640,10 +699,10 @@
     <div class="chat-drawer" id="chatDrawer">
         <div class="chat-header">
             <div>
-                <strong>Chat con Jimy Copilot</strong>
+                <strong>Chat con Jimmy Copilot</strong>
                 <p style="opacity:0.7; font-size:0.85rem;">Pregunta sobre el contenido del sitio</p>
             </div>
-            <button id="chatClose" style="background:transparent; border:none; color:white; font-size:1.5rem; cursor:pointer;">×</button>
+            <button id="chatMinimize" class="chat-minimize">Ocultar</button>
         </div>
         <div class="chat-body" id="chatBody">
             <div class="chat-message bot">👋 Hola, soy el copiloto virtual de Harvest.AI. Hazme una pregunta o usa las sugerencias.</div>
@@ -653,6 +712,7 @@
             <button data-question="¿Cuál es el plan de 18 meses?">Plan 18M</button>
             <button data-question="¿Cómo puedo acceder a los documentos?">Documentos</button>
             <button data-question="¿Qué pasos hay para la visa?">Visa EB-1A/O-1</button>
+            <button data-question="¿Dónde veo el diseño y componentes de Harvest.AI?">Diseño & componentes</button>
         </div>
         <form class="chat-input" id="chatForm">
             <input type="text" id="chatField" placeholder="Escribe tu pregunta...">
@@ -697,7 +757,7 @@
 
         const chatLauncher = document.getElementById('chatLauncher');
         const chatDrawer = document.getElementById('chatDrawer');
-        const chatClose = document.getElementById('chatClose');
+        const chatMinimize = document.getElementById('chatMinimize');
         const chatBody = document.getElementById('chatBody');
         const chatForm = document.getElementById('chatForm');
         const chatField = document.getElementById('chatField');
@@ -706,19 +766,22 @@
             '¿Qué diferencia al stack híbrido?': 'Harvest.AI prioriza LoRaWAN por bajo consumo, cambia a satélite IoT cuando detecta caída >5 minutos y mantiene sincronización mesh local. Revisa "El Proyecto" para ver las ventajas del triple-stack.',
             '¿Cuál es el plan de 18 meses?': 'El roadmap está dividido en Validación (Meses 1-3), Tracción (4-9) y Escalamiento (10-18). Cada fase tiene métricas y entregables. Explora la sección Roadmap para el timeline completo.',
             '¿Cómo puedo acceder a los documentos?': 'Visita Documentos para leer los resúmenes y descarga los TXT desde cada tarjeta o entra al Centro de Descargas.',
-            '¿Qué pasos hay para la visa?': 'La estrategia migratoria se detalla en el Plan de Negocio: consulta a abogado en Mes 1, documenta logros (patentes, clientes, papers) y prepara la evidencia EB-1A/O-1 entre los meses 12-14.'
+            '¿Qué pasos hay para la visa?': 'La estrategia migratoria se detalla en el Plan de Negocio: consulta a abogado en Mes 1, documenta logros (patentes, clientes, papers) y prepara la evidencia EB-1A/O-1 entre los meses 12-14.',
+            '¿Dónde veo el diseño y componentes de Harvest.AI?': 'Revisa la nueva sección \"Diseño & Componentes\" para ver el blueprint y descarga la lista completa desde Lista_componentes_HARVESTAI.md. También puedes ir a NanoBanana para generar renders.'
         };
 
         function toggleChat(open) {
             if (open) {
                 chatDrawer.classList.add('open');
+                chatLauncher.classList.add('hidden');
                 chatField.focus();
             } else {
                 chatDrawer.classList.remove('open');
+                chatLauncher.classList.remove('hidden');
             }
         }
         chatLauncher.addEventListener('click', () => toggleChat(true));
-        chatClose.addEventListener('click', () => toggleChat(false));
+        chatMinimize.addEventListener('click', () => toggleChat(false));
 
         document.querySelectorAll('.chat-prompts button').forEach(btn => {
             btn.addEventListener('click', () => {
