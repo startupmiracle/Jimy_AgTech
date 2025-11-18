@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Índice y Guía | Jimy AgTech</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family:'Inter',sans-serif; background:#f5f8f2; margin:0; color:#0f1e15; }
+        header { max-width:1100px; margin:0 auto; padding:1.5rem; display:flex; justify-content:space-between; align-items:center; }
+        .btn { padding:0.85rem 1.5rem; border-radius:999px; border:none; cursor:pointer; font-weight:600; text-decoration:none; display:inline-flex; align-items:center; }
+        .btn-primary { background:linear-gradient(120deg,#18a67c,#58d68d); color:#fff; }
+        .btn-ghost { border:1px solid rgba(15,30,21,0.15); background:#fff; color:#0b3d2c; }
+        .hero, .section { max-width:1100px; margin:0 auto 2rem; background:#fff; border-radius:30px; padding:2.5rem; box-shadow:0 25px 60px rgba(15,30,21,0.05); }
+        h1 { font-size:2.5rem; margin-bottom:1rem; }
+        h2 { font-size:1.8rem; margin-bottom:1rem; }
+        .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:1.5rem; }
+        .card { background:#f7faf5; border-radius:18px; padding:1.3rem; border:1px solid rgba(15,30,21,0.05); }
+        ul { line-height:1.8; color:#4c5f50; }
+        footer { text-align:center; padding:2rem 0 3rem; color:#607062; }
+    </style>
+</head>
+<body>
+    <header>
+        <a class="btn btn-ghost" href="index.html#documents">← Volver</a>
+        <div style="display:flex; gap:0.7rem; flex-wrap:wrap;">
+            <a class="btn btn-primary" href="downloads/README_Indice_Jimy.txt" download>Descargar TXT</a>
+            <a class="btn btn-ghost" href="web_files/README_Indice_Jimy.md" download>Descargar MD</a>
+        </div>
+    </header>
+
+    <section class="hero">
+        <p style="text-transform:uppercase; letter-spacing:0.2em; color:#18a67c; font-weight:600;">Resumen</p>
+        <h1>Índice completo + guía de implementación</h1>
+        <p style="color:#4c5f50; font-size:1.05rem;">Documento que reúne los cuatro entregables maestros, explica cuándo usar cada uno y ofrece un plan de 7 días, ritual semanal y checklist mensual.</p>
+    </section>
+
+    <section class="section">
+        <h2>Contenido destacado</h2>
+        <div class="grid">
+            <div class="card">
+                <strong>Mapa del kit</strong>
+                <p>Describe qué contiene cada archivo (plan, patente, AI copilot, website) y su propósito.</p>
+            </div>
+            <div class="card">
+                <strong>Checklist 7 días</strong>
+                <p>Acciones concretas para la primera semana (lecturas, setup de IA, entrevistas piloto).</p>
+            </div>
+            <div class="card">
+                <strong>Ciclo semanal</strong>
+                <p>Rutina de lunes (plan), martes-viernes (ejecución) y viernes (retro) + checkpoint mensual.</p>
+            </div>
+            <div class="card">
+                <strong>Quick customizations</strong>
+                <p>Guía para personalizar emails, links y datos de contacto en el website y documentos.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>Cómo aprovecharlo</h2>
+        <ul>
+            <li>Úsalo como hub para compartir el progreso con advisors y mantener consistencia entre documentos.</li>
+            <li>Duplica las checklists en tu gestor favorito (Notion, ClickUp, Sheets).</li>
+            <li>Actualiza semanalmente los "Próximos 7 días" para mantener claridad sobre el enfoque.</li>
+            <li>Enlázalo al AI Copilot para que entienda qué documento citar según el contexto.</li>
+        </ul>
+    </section>
+
+    <footer>
+        <p>La versión TXT funciona offline y se puede enviar fácilmente a colaboradores.</p>
+        <div style="display:flex; justify-content:center; gap:0.8rem; flex-wrap:wrap; margin-top:1rem;">
+            <a class="btn btn-primary" href="downloads/README_Indice_Jimy.txt" download>Descargar TXT</a>
+            <a class="btn btn-ghost" href="web_files/README_Indice_Jimy.md" download>Ver Markdown</a>
+        </div>
+    </footer>
+</body>
+</html>

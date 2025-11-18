@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Outline Patente | Jimy AgTech</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family:'Inter',sans-serif; background:#f3f6ef; margin:0; color:#0f1e15; }
+        header { max-width:1100px; margin:0 auto; padding:1.5rem; display:flex; justify-content:space-between; align-items:center; }
+        .btn { padding:0.85rem 1.5rem; border-radius:999px; border:none; cursor:pointer; font-weight:600; text-decoration:none; display:inline-flex; align-items:center; }
+        .btn-primary { background:linear-gradient(120deg,#18a67c,#58d68d); color:#fff; }
+        .btn-ghost { border:1px solid rgba(15,30,21,0.15); background:#fff; color:#0b3d2c; }
+        .wrapper { max-width:1100px; margin:0 auto 2rem; }
+        .section { background:#fff; border-radius:28px; padding:2.5rem; margin-bottom:2rem; box-shadow:0 25px 60px rgba(15,30,21,0.06); }
+        h1 { font-size:2.5rem; margin-bottom:1rem; }
+        h2 { font-size:1.8rem; margin-bottom:1rem; }
+        .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:1.5rem; }
+        .card { background:#f7faf5; border-radius:18px; padding:1.3rem 1.4rem; border:1px solid rgba(15,30,21,0.05); }
+        ul { line-height:1.8; color:#4c5f50; }
+        footer { text-align:center; padding:2rem 0 3rem; color:#607062; }
+    </style>
+</head>
+<body>
+    <header>
+        <a class="btn btn-ghost" href="index.html#documents">← Volver</a>
+        <div style="display:flex; gap:0.7rem; flex-wrap:wrap;">
+            <a class="btn btn-primary" href="downloads/Outline_Patente_Provisional_Jimy.txt" download>Descargar TXT</a>
+            <a class="btn btn-ghost" href="web_files/Outline_Patente_Provisional_Jimy.md" download>Descargar MD</a>
+        </div>
+    </header>
+
+    <div class="wrapper">
+        <section class="section">
+            <p style="text-transform:uppercase; letter-spacing:0.2em; color:#18a67c; font-weight:600;">Resumen</p>
+            <h1>Outline Patente Provisional</h1>
+            <p style="color:#4c5f50; font-size:1.1rem;">Documento que organiza la patente provisional de Jimy: resumen, antecedentes, diferenciador, descripción técnica de hardware/firmware y claims sugeridos. Incluye prior art y checklist previo a USPTO.</p>
+        </section>
+
+        <section class="section">
+            <h2>Componentes principales</h2>
+            <div class="grid">
+                <div class="card">
+                    <strong>Resumen y campo técnico</strong>
+                    <p>Describe el dispositivo de captura de datos con arquitectura híbrida y especifica que aplica a IoT agrícola, telecom en zonas remotas y edge AI.</p>
+                </div>
+                <div class="card">
+                    <strong>Estado de la técnica</strong>
+                    <p>Analiza LoRaWAN, satélites, LTE-M/NB-IoT, mesh networks y sistemas offline, resaltando dónde fallan.</p>
+                </div>
+                <div class="card">
+                    <strong>Objeto de la invención</strong>
+                    <p>Explica la arquitectura "triple-stack redundante" y su algoritmo propietario de failover con métricas de latencia y confiabilidad.</p>
+                </div>
+                <div class="card">
+                    <strong>Descripción detallada</strong>
+                    <p>Secciones para hardware (sensores, baterías, módulos RF), firmware y flujo de datos con buffer y AI local.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Por qué es útil</h2>
+            <ul>
+                <li>Sirve como checklist previo a trabajar con abogado y evita olvidar elementos clave (claims, drawings, prior art).</li>
+                <li>Documenta ventajas cuantitativas (menor latencia, menor costo, instalación rápida) para fortalecer el argumento.</li>
+                <li>Alinea los use cases con el roadmap (riego automático, detección de plagas, monitoreo microclima).</li>
+                <li>Incluye recordatorios sobre protección internacional y costos estimados.</li>
+            </ul>
+        </section>
+
+        <section class="section">
+            <h2>Pasos siguientes sugeridos</h2>
+            <ol style="color:#4c5f50; line-height:1.8;">
+                <li>Completar los campos marcados como [A DEFINIR] con el diferenciador real y especificaciones de hardware.</li>
+                <li>Validar prior art adicional vía Google Patents y guardarlo como anexos.</li>
+                <li>Enviar este outline al abogado para acelerar el borrador oficial y reducir horas facturadas.</li>
+                <li>Actualizar la sección de claims una vez que el MVP esté validado y existan métricas.</li>
+            </ol>
+        </section>
+    </div>
+
+    <footer>
+        <p>Descarga el TXT para revisar sin formato y compartirlo con tu abogado.</p>
+        <div style="display:flex; justify-content:center; gap:0.8rem; flex-wrap:wrap; margin-top:1rem;">
+            <a class="btn btn-primary" href="downloads/Outline_Patente_Provisional_Jimy.txt" download>Descargar TXT</a>
+            <a class="btn btn-ghost" href="web_files/Outline_Patente_Provisional_Jimy.md" download>Ver Markdown</a>
+        </div>
+    </footer>
+</body>
+</html>

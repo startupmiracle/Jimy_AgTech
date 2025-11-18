@@ -3,340 +3,769 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jimy AgTech | Remote Data Capture IoT</title>
+    <title>Harvest.AI | Remote Data Capture IoT</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
-            --primary: #2d5016; --secondary: #7cb342; --accent: #558b2f;
-            --dark: #1a1a1a; --light: #f5f5f5; --text: #333; --gray: #666;
+            --primary: #0b3d2c;
+            --secondary: #18a67c;
+            --accent: #cbe977;
+            --ink: #0f1e15;
+            --muted: #5a6c5e;
+            --surface: #f3f7ef;
+            --card: rgba(255,255,255,0.9);
         }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: var(--text); background: white; }
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-        header { background: linear-gradient(135deg, var(--primary), var(--accent)); color: white; padding: 1rem 0; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-        nav { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; }
-        .logo { font-size: 1.8rem; font-weight: bold; display: flex; gap: 10px; align-items: center; }
-        .nav-menu { display: flex; list-style: none; gap: 2rem; align-items: center; }
-        .nav-menu a { color: white; text-decoration: none; font-weight: 500; transition: color 0.3s; }
-        .nav-menu a:hover { color: var(--secondary); }
-        .hamburger { display: none; flex-direction: column; cursor: pointer; gap: 5px; }
-        .hamburger span { width: 25px; height: 3px; background: white; transition: 0.3s; }
-        @media (max-width: 768px) {
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: radial-gradient(circle at top, #f7fff4 0%, #e3f0e6 35%, #d2e7dc 55%, #f7fff4 100%);
+            color: var(--ink);
+            line-height: 1.6;
+        }
+        a { color: inherit; }
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(11, 61, 44, 0.92);
+            backdrop-filter: blur(6px);
+            box-shadow: 0 8px 30px rgba(11, 61, 44, 0.25);
+        }
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: white;
+            font-size: 1.25rem;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+        }
+        .logo span:last-child { opacity: 0.8; font-size: 0.85rem; font-weight: 400; }
+        .nav-menu {
+            list-style: none;
+            display: flex;
+            gap: 1.5rem;
+            color: rgba(255,255,255,0.9);
+        }
+        .nav-menu a {
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+        .nav-menu a:hover { color: var(--accent); }
+        .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+        .hamburger span { width: 25px; height: 3px; background: #fff; border-radius: 2px; }
+        @media (max-width: 900px) {
+            .nav-menu { position: absolute; inset: 70px 1rem auto 1rem; flex-direction: column; padding: 1.5rem; background: rgba(11,61,44,0.95); border-radius: 12px; display: none; }
+            .nav-menu.active { display: flex; }
             .hamburger { display: flex; }
-            .nav-menu { position: absolute; top: 70px; left: 0; right: 0; flex-direction: column; background: var(--primary); gap: 0; padding: 1rem; text-align: center; max-height: 0; overflow: hidden; transition: max-height 0.3s; }
-            .nav-menu.active { max-height: 400px; }
-            .nav-menu li { padding: 1rem 0; }
         }
-        .hero { background: linear-gradient(135deg, var(--primary), var(--accent)); color: white; padding: 5rem 0; text-align: center; }
-        .hero h1 { font-size: 3rem; margin-bottom: 1rem; }
-        .hero p { font-size: 1.3rem; margin-bottom: 2rem; opacity: 0.95; }
-        @media (max-width: 768px) { .hero h1 { font-size: 2rem; } }
-        .btn { background: var(--secondary); color: white; padding: 1rem 2.5rem; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; text-decoration: none; display: inline-block; margin: 0.5rem; transition: all 0.3s; }
-        .btn:hover { background: var(--primary); transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
-        .btn-outline { background: transparent; border: 2px solid var(--secondary); color: var(--secondary); }
-        .btn-outline:hover { background: var(--secondary); color: white; }
-        section { padding: 4rem 0; }
-        section.light { background: var(--light); }
-        section h2 { font-size: 2.5rem; color: var(--primary); margin-bottom: 3rem; text-align: center; }
-        section h3 { font-size: 1.5rem; color: var(--accent); margin: 1.5rem 0 1rem 0; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-top: 2rem; }
-        .card { background: white; border: 1px solid #ddd; padding: 2rem; border-radius: 10px; text-align: center; transition: all 0.3s; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-        .card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
-        .icon { font-size: 2.5rem; margin-bottom: 1rem; }
-        .stat-box { background: linear-gradient(135deg, var(--secondary), var(--accent)); color: white; padding: 2rem; border-radius: 10px; text-align: center; }
-        .stat-number { font-size: 2.5rem; font-weight: bold; margin-bottom: 0.5rem; }
-        .timeline { position: relative; padding: 2rem 0; }
-        .timeline::before { content: ''; position: absolute; left: 50%; width: 3px; height: 100%; background: var(--secondary); transform: translateX(-50%); }
-        .timeline-item { margin-bottom: 3rem; position: relative; }
-        .timeline-item:nth-child(odd) .content { margin-left: 0; margin-right: auto; width: 48%; text-align: right; }
-        .timeline-item:nth-child(even) .content { margin-left: auto; margin-right: 0; width: 48%; text-align: left; }
-        .timeline-dot { position: absolute; left: 50%; width: 15px; height: 15px; background: var(--secondary); border: 3px solid white; border-radius: 50%; top: 0; transform: translateX(-50%); }
-        .content { background: var(--light); padding: 1.5rem; border-radius: 5px; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+        section { padding: 4.5rem 0; }
+        h1, h2, h3, h4 { color: var(--ink); }
+        h2 { font-size: 2.5rem; text-align: center; margin-bottom: 2rem; }
+        h3 { font-size: 1.5rem; }
+        .eyebrow { text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.75rem; color: var(--secondary); font-weight: 600; }
+        .hero { padding: 5rem 0 4rem; }
+        .hero-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2.5rem; align-items: center; }
+        .hero h1 { font-size: 3.25rem; line-height: 1.1; margin-bottom: 1rem; }
+        .hero .hero-copy p { color: var(--muted); font-size: 1.1rem; margin-bottom: 2rem; }
+        .pill-group { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 1.5rem; }
+        .pill { background: rgba(24,166,124,0.12); color: var(--primary); padding: 0.35rem 0.85rem; border-radius: 999px; font-size: 0.9rem; font-weight: 600; }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+            padding: 0.95rem 1.8rem;
+            border-radius: 12px;
+            border: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            text-decoration: none;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .btn-primary {
+            background: linear-gradient(120deg, #18a67c, #58d68d);
+            color: #fff;
+            box-shadow: 0 15px 35px rgba(24, 166, 124, 0.35);
+        }
+        .btn-outline { border: 1px solid rgba(255,255,255,0.4); color: white; background: transparent; }
+        .btn-ghost { border: 1px solid rgba(24,166,124,0.4); color: var(--primary); background: transparent; }
+        .btn:hover { transform: translateY(-2px); }
+        .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; margin-top: 2.5rem; }
+        .stat-card { background: var(--card); padding: 1.5rem; border-radius: 16px; box-shadow: 0 30px 70px rgba(15,30,21,0.08); }
+        .stat-card h3 { font-size: 2rem; margin-bottom: 0.3rem; }
+        .hero-visual { background: #071e15; border-radius: 28px; padding: 1.2rem; position: relative; box-shadow: 0 35px 70px rgba(7,30,21,0.45); }
+        .hero-visual img { width: 100%; border-radius: 22px; display: block; }
+        .hero-visual .badge { position: absolute; top: 16px; left: 16px; background: rgba(24,166,124,0.9); color: white; padding: 0.45rem 1.2rem; border-radius: 999px; font-weight: 600; }
+        .hero-ad { position: absolute; bottom: 16px; right: 16px; background: rgba(255,255,255,0.95); border-radius: 18px; padding: 0.8rem; width: 160px; box-shadow: 0 15px 40px rgba(0,0,0,0.3); }
+        .hero-ad img { width: 100%; border-radius: 12px; }
+        .section-card { background: var(--card); border-radius: 20px; padding: 2rem; box-shadow: 0 30px 70px rgba(15,30,21,0.08); }
+        .dual-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2.5rem; align-items: center; }
+        .project-layout { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 2rem; align-items: stretch; }
+        .project-visual { background: #0b3d2c; color: white; border-radius: 24px; padding: 2rem; display: flex; flex-direction: column; gap: 1.5rem; box-shadow: 0 35px 60px rgba(11,61,44,0.35); }
+        .project-visual .highlight { font-size: 2.4rem; font-weight: 700; }
+        .mesh-diagram { width: 100%; border-radius: 18px; border: 1px solid rgba(255,255,255,0.2); }
+        .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-top: 2rem; }
+        .feature-card { background: rgba(255,255,255,0.95); border-radius: 18px; padding: 1.5rem; border: 1px solid rgba(15,30,21,0.08); display: flex; flex-direction: column; gap: 0.7rem; }
+        .feature-card span { font-size: 1.8rem; }
+        .documents-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; }
+        .doc-card { padding: 1.75rem; border-radius: 20px; background: var(--card); box-shadow: 0 30px 60px rgba(15,30,21,0.08); display: flex; flex-direction: column; gap: 1rem; border: 1px solid rgba(15,30,21,0.04); }
+        .doc-card h3 { font-size: 1.3rem; }
+        .doc-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+        .doc-tags span { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; background: rgba(24,166,124,0.15); color: var(--primary); padding: 0.3rem 0.7rem; border-radius: 999px; }
+        .doc-actions { margin-top: auto; display: flex; flex-wrap: wrap; gap: 0.5rem; }
+        .roadmap-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; margin-bottom: 2.5rem; }
+        .roadmap-card { border-radius: 20px; padding: 1.8rem; background: var(--card); box-shadow: 0 20px 50px rgba(15,30,21,0.08); border: 1px solid rgba(24,166,124,0.2); }
+        .roadmap-card h4 { font-size: 1.1rem; margin: 0.5rem 0 1rem; }
+        .roadmap-card ul { list-style: none; color: var(--muted); line-height: 1.6; }
+        .timeline { position: relative; padding-left: 2rem; border-left: 2px dashed rgba(24,166,124,0.6); margin-left: 0.5rem; }
+        .timeline-item { margin-bottom: 1.5rem; }
+        .timeline-item::before { content: ''; width: 10px; height: 10px; border-radius: 50%; background: var(--secondary); position: absolute; left: -6px; margin-top: 0.4rem; }
+        .resource-columns { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+        .resource-card { background: rgba(255,255,255,0.9); padding: 1.5rem; border-radius: 18px; border: 1px solid rgba(15,30,21,0.08); }
+        .gallery-track { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(220px, 1fr); gap: 1rem; overflow-x: auto; padding-bottom: 1rem; }
+        .gallery-item { border: none; background: transparent; padding: 0; cursor: pointer; }
+        .gallery-item figure { position: relative; border-radius: 18px; overflow: hidden; border: 1px solid rgba(15,30,21,0.1); }
+        .gallery-item img { width: 100%; height: 180px; object-fit: cover; display: block; }
+        .gallery-item figcaption { position: absolute; bottom: 0; left: 0; right: 0; padding: 0.6rem 0.8rem; background: linear-gradient(180deg, transparent, rgba(0,0,0,0.65)); color: white; font-size: 0.85rem; }
+        .lightbox { position: fixed; inset: 0; background: rgba(0,0,0,0.7); display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.2s ease; z-index: 1200; }
+        .lightbox.open { opacity: 1; pointer-events: all; }
+        .lightbox-content { background: white; padding: 1rem; border-radius: 18px; max-width: 90vw; max-height: 90vh; display: flex; flex-direction: column; gap: 0.8rem; }
+        .lightbox-content img { max-width: 80vw; max-height: 70vh; object-fit: contain; border-radius: 14px; }
+        .lightbox-close { align-self: flex-end; border: none; background: transparent; font-size: 1.8rem; cursor: pointer; }
+        .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 2rem; }
+        .contact-panel { background: #0b3d2c; color: white; border-radius: 22px; padding: 2rem; }
+        .contact-panel a { color: var(--accent); }
+        form { background: var(--card); padding: 2rem; border-radius: 22px; box-shadow: 0 30px 50px rgba(15,30,21,0.08); }
+        .form-group { margin-bottom: 1rem; display: flex; flex-direction: column; gap: 0.4rem; }
+        input, textarea {
+            border: 1px solid rgba(15,30,21,0.1);
+            border-radius: 12px;
+            padding: 0.9rem 1rem;
+            font-family: inherit;
+            font-size: 1rem;
+            background: white;
+        }
+        textarea { min-height: 120px; resize: vertical; }
+        footer { background: #071e15; color: rgba(255,255,255,0.7); padding: 3rem 0 2rem; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; }
+        .scroll-to-top {
+            position: fixed;
+            bottom: 80px;
+            right: 30px;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            display: grid;
+            place-items: center;
+            cursor: pointer;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s ease, transform 0.2s ease;
+        }
+        .scroll-to-top.visible { opacity: 1; pointer-events: all; transform: translateY(-8px); }
+        .chat-launcher {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #18a67c, #58d68d);
+            width: 58px;
+            height: 58px;
+            border-radius: 50%;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            cursor: pointer;
+            box-shadow: 0 20px 45px rgba(10,35,25,0.35);
+            z-index: 999;
+        }
+        .chat-drawer {
+            position: fixed;
+            top: 0;
+            right: 0;
+            height: 100%;
+            width: 380px;
+            max-width: 100%;
+            background: #ffffff;
+            box-shadow: -20px 0 60px rgba(15,30,21,0.25);
+            transform: translateX(110%);
+            transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            z-index: 998;
+        }
+        .chat-drawer.open { transform: translateX(0); }
+        .chat-header {
+            padding: 1.5rem;
+            background: #0b3d2c;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .chat-body {
+            flex: 1;
+            padding: 1rem 1.5rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+        .chat-message { padding: 0.9rem 1rem; border-radius: 16px; max-width: 85%; }
+        .chat-message.bot { background: rgba(24,166,124,0.15); color: var(--ink); align-self: flex-start; }
+        .chat-message.user { background: #0b3d2c; color: white; align-self: flex-end; }
+        .chat-prompts { padding: 0.7rem 1.5rem; display: flex; flex-wrap: wrap; gap: 0.5rem; border-top: 1px solid rgba(15,30,21,0.08); }
+        .chat-prompts button { padding: 0.45rem 0.9rem; border-radius: 999px; border: 1px solid rgba(24,166,124,0.3); background: transparent; cursor: pointer; font-weight: 600; font-size: 0.85rem; color: var(--primary); }
+        .chat-input { padding: 1rem 1.5rem 1.5rem; display: flex; gap: 0.6rem; border-top: 1px solid rgba(15,30,21,0.08); }
+        .chat-input input { flex: 1; border-radius: 999px; border: 1px solid rgba(15,30,21,0.1); padding: 0.8rem 1.2rem; }
+        .chat-input button { padding: 0.8rem 1.4rem; border-radius: 999px; border: none; background: var(--secondary); color: white; font-weight: 600; cursor: pointer; }
         @media (max-width: 768px) {
-            .timeline::before { left: 20px; }
-            .timeline-item:nth-child(odd) .content, .timeline-item:nth-child(even) .content { width: calc(100% - 60px); text-align: left; margin-left: 60px !important; margin-right: 0 !important; }
-            .timeline-dot { left: 20px; }
+            .hero h1 { font-size: 2.2rem; }
+            .project-layout { grid-template-columns: 1fr; }
+            .chat-drawer { width: 100%; height: 70vh; bottom: 0; top: auto; transform: translateY(110%); border-radius: 18px 18px 0 0; }
+            .chat-drawer.open { transform: translateY(0); }
         }
-        .form-group { margin-bottom: 1.5rem; }
-        .form-group label { display: block; margin-bottom: 0.5rem; font-weight: bold; color: var(--primary); }
-        .form-group input, .form-group textarea { width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 5px; font-family: inherit; font-size: 1rem; }
-        .form-group textarea { resize: vertical; min-height: 120px; }
-        .submit-btn { background: var(--secondary); color: white; padding: 1rem 2rem; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; width: 100%; transition: background 0.3s; }
-        .submit-btn:hover { background: var(--primary); }
-        footer { background: var(--dark); color: white; padding: 3rem 0 1rem; margin-top: 4rem; }
-        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin-bottom: 2rem; }
-        .footer-section h4 { color: var(--secondary); margin-bottom: 1rem; }
-        .footer-section ul { list-style: none; }
-        .footer-section a { color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.3s; }
-        .footer-section a:hover { color: var(--secondary); }
-        .scroll-to-top { position: fixed; bottom: 20px; right: 20px; background: var(--secondary); color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; opacity: 0; visibility: hidden; transition: all 0.3s; z-index: 999; font-size: 1.2rem; }
-        .scroll-to-top.visible { opacity: 1; visibility: visible; }
-        .scroll-to-top:hover { background: var(--primary); transform: translateY(-5px); }
     </style>
 </head>
 <body>
     <header>
-        <nav class="container">
+        <nav>
             <div class="logo">
-                <span>🌾</span>
-                <span>Jimy AgTech</span>
+                <span>🌱</span>
+                <div>
+                    Harvest.AI
+                    <span>Por Jimy · Remote Data Capture</span>
+                </div>
             </div>
             <ul class="nav-menu" id="navMenu">
                 <li><a href="#home">Inicio</a></li>
-                <li><a href="#about">Sobre mí</a></li>
+                <li><a href="#about">Fundador</a></li>
                 <li><a href="#project">Proyecto</a></li>
-                <li><a href="#roadmap">Roadmap</a></li>
                 <li><a href="#documents">Documentos</a></li>
+                <li><a href="#roadmap">Roadmap</a></li>
+                <li><a href="#gallery">Galería</a></li>
                 <li><a href="#resources">Recursos</a></li>
                 <li><a href="#contact">Contacto</a></li>
             </ul>
-            <div class="hamburger" id="hamburger">
-                <span></span><span></span><span></span>
-            </div>
+            <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
         </nav>
     </header>
 
-    <section class="hero" id="home">
-        <div class="container">
-            <h1>Transformando la Agricultura Remota con IoT</h1>
-            <p>Dispositivo innovador para captura de datos en zonas sin conectividad estándar</p>
-            <div>
-                <a href="#project" class="btn">Ver Proyecto</a>
-                <a href="#documents" class="btn btn-outline">Descargar Documentos</a>
+    <main>
+        <section class="hero" id="home">
+            <div class="container">
+                <div class="hero-grid">
+                    <div class="hero-copy">
+                        <p class="eyebrow">Harvest.AI</p>
+                        <h1>El dispositivo inteligente que conecta granjas desconectadas</h1>
+                        <p>Harvest.AI combina conectividad híbrida y edge AI para capturar datos agrícolas en tiempo real, incluso donde no llega la fibra. Diseñado por Jimy para crear tracción, IP y evidencia de visa.</p>
+                        <div class="pill-group">
+                            <span class="pill">IoT triple enlace</span>
+                            <span class="pill">Edge AI</span>
+                            <span class="pill">Vista 360°</span>
+                            <span class="pill">Visa EB-1A/O-1</span>
+                        </div>
+                        <div>
+                            <a class="btn btn-primary" href="#project">Explorar Harvest.AI</a>
+                            <a class="btn btn-ghost" href="#documents">Ver documentos</a>
+                        </div>
+                    </div>
+                    <div class="hero-visual">
+                        <span class="badge">Prototipo Harvest.AI</span>
+                        <img src="clipart_files/Harvest-AI-Prototype-field_Image_ktvs46ktvs46ktvs.png" alt="Harvest.AI prototipo en campo">
+                        <div class="hero-ad">
+                            <img src="clipart_files/Harvest-AI-ad-farmer.png" alt="Campaña de publicidad Harvest.AI">
+                            <p style="font-size:0.75rem; margin-top:0.4rem; color:#0b3d2c; font-weight:600;">Campaña piloto · Farmer-facing</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="stat-grid">
+                    <div class="stat-card"><h3>18M</h3><p>Plan maestro para validar, patentar y escalar</p></div>
+                    <div class="stat-card"><h3>3x</h3><p>Capas de comunicación redundante</p></div>
+                    <div class="stat-card"><h3>$100M</h3><p>TAM inicial en USA</p></div>
+                    <div class="stat-card"><h3>4</h3><p>Documentos estratégicos listos</p></div>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="about">
-        <div class="container">
-            <h2>Sobre Jimy</h2>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center;">
-                <div style="background: linear-gradient(135deg, var(--secondary), var(--accent)); color: white; padding: 3rem; border-radius: 10px; text-align: center; font-size: 4rem;">👨‍💻<br><br>Ingeniero de<br>Telecomunicaciones</div>
-                <div>
-                    <h3>Perfil Profesional</h3>
-                    <p>Ingeniero de telecomunicaciones originario de Venezuela con <strong>8 años de experiencia</strong> como Field Technician en South Florida. Especializado en RF engineering, instalaciones de campo y sistemas de telecomunicaciones.</p>
-                    <h3>Visión</h3>
-                    <p>Transición a <strong>founder/CTO</strong> de startup AgTech, combinando expertise en telecomunicaciones con innovación en agricultura de precisión.</p>
-                    <h3>Objetivo</h3>
-                    <p>Desarrollar solución disruptiva de captura de datos agrícola para zonas remotas, obtener patente, publicar investigación y asegurar visa de talento (EB-1A/O-1).</p>
-                    <div style="margin-top: 1rem;">
-                        <span style="display: inline-block; background: var(--secondary); color: white; padding: 0.5rem 1rem; border-radius: 20px; margin: 0.3rem; font-weight: bold;">RF Engineering</span>
-                        <span style="display: inline-block; background: var(--secondary); color: white; padding: 0.5rem 1rem; border-radius: 20px; margin: 0.3rem; font-weight: bold;">IoT Systems</span>
-                        <span style="display: inline-block; background: var(--secondary); color: white; padding: 0.5rem 1rem; border-radius: 20px; margin: 0.3rem; font-weight: bold;">Telecom Protocols</span>
+        <section id="about">
+            <div class="container">
+                <div class="dual-grid section-card">
+                    <div>
+                        <p class="eyebrow">Sobre Jimy</p>
+                        <h2>Telecom engineer → fundador de Harvest.AI</h2>
+                        <p>Venezolano con 8 años instalando infraestructura de telecom en South Florida. Experto en RF, resiliencia de redes y despliegues de campo. Ahora lidera Harvest.AI para resolver la desconexión agrícola y crear evidencia para su visa de talento.</p>
+                        <ul style="list-style:none; margin-top:1rem; color:var(--muted); line-height:1.8;">
+                            <li>• Experiencia directa con granjas y climas extremos</li>
+                            <li>• Bilingüe, orientado a resultados y a evidencia</li>
+                            <li>• Roadmap claro: producto + patente + clientes + visa</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <div class="feature-card" style="height:100%; justify-content:center; background:rgba(24,166,124,0.12);">
+                            <span>🛰️</span>
+                            <h3>Stack técnico Harvest.AI</h3>
+                            <p>LoRaWAN • Satélite IoT • Mesh local • Edge AI • Sensor suite ambiental • Dashboard SaaS.</p>
+                            <h3>Objetivo personal</h3>
+                            <p>Fundar una empresa AgTech rentable y reconocida que respalde su petición EB-1A/O-1.</p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section class="light" id="project">
-        <div class="container">
-            <h2>El Proyecto</h2>
-            <div style="background: var(--light); padding: 2rem; border-radius: 10px; margin-bottom: 2rem; border-left: 5px solid var(--secondary);">
-                <h3>🎯 Problema</h3>
-                <p>Farmers en zonas rurales sin cobertura de fibra/celular adecuada <strong>no pueden acceder a datos en tiempo real</strong> para decisiones sobre riego, nutrición y prevención de plagas.</p>
-            </div>
-            <div style="background: var(--light); padding: 2rem; border-radius: 10px; margin-bottom: 2rem; border-left: 5px solid var(--secondary);">
-                <h3>💡 Solución</h3>
-                <p>Dispositivo patentado de <strong>captura/transmisión híbrida de datos</strong> que combina LoRaWAN, satélite IoT y mesh local para garantizar conectividad confiable con latencia baja e <strong>IA local</strong> para decisiones autónomas.</p>
-            </div>
-            <h3 style="text-align: center; margin: 2rem 0;">Características Principales</h3>
-            <div class="grid">
-                <div class="card"><div class="icon">📡</div><h4>Triple-Stack Redundante</h4><p>LoRaWAN primario + Satélite + Mesh local automático</p></div>
-                <div class="card"><div class="icon">🤖</div><h4>AI Edge Processing</h4><p>Decisiones autónomas local sin depender de cloud</p></div>
-                <div class="card"><div class="icon">⚡</div><h4>Bajo Consumo</h4><p>Eficiencia energética optimizada para operación indefinida</p></div>
-                <div class="card"><div class="icon">🔧</div><h4>Fácil Instalación</h4><p>Plug & play, sin know-how técnico requerido</p></div>
-                <div class="card"><div class="icon">💾</div><h4>Histórico Local</h4><p>Sincronización automática cuando reconecta</p></div>
-                <div class="card"><div class="icon">📊</div><h4>Dashboard Inteligente</h4><p>Visualización real-time + alertas automáticas</p></div>
-            </div>
-            <h3 style="text-align: center; margin: 2rem 0; margin-top: 3rem;">Valor de Mercado</h3>
-            <div class="grid">
-                <div class="stat-box"><div class="stat-number">$100-250M</div><div>TAM (Total Addressable Market)</div></div>
-                <div class="stat-box"><div class="stat-number">50K+</div><div>Explotaciones objetivo en USA</div></div>
-                <div class="stat-box"><div class="stat-number">$3-5K</div><div>Annual Revenue por granja</div></div>
-                <div class="stat-box"><div class="stat-number">15-20%</div><div>Margen bruto proyectado</div></div>
-            </div>
-        </div>
-    </section>
-
-    <section id="roadmap">
-        <div class="container">
-            <h2>Roadmap 18 Meses</h2>
-            <div class="grid">
-                <div class="card" style="border: 2px solid var(--secondary);">
-                    <div style="font-size: 3rem; font-weight: bold; color: var(--secondary); margin-bottom: 0.5rem;">01</div>
-                    <h4>Validación (Meses 1-3)</h4>
-                    <ul style="text-align: left; list-style: none; margin-top: 1rem;">
-                        <li>✓ Validación mercado</li>
-                        <li>✓ MVP rústico</li>
-                        <li>✓ Diferenciador técnico</li>
-                        <li>✓ Abogado contactado</li>
-                    </ul>
-                </div>
-                <div class="card" style="border: 2px solid var(--secondary); background: linear-gradient(135deg, var(--secondary), var(--accent)); color: white;">
-                    <div style="font-size: 3rem; font-weight: bold; margin-bottom: 0.5rem;">02</div>
-                    <h4>Traction (Meses 4-9)</h4>
-                    <ul style="text-align: left; list-style: none; margin-top: 1rem;">
-                        <li>✓ Patente provisional</li>
-                        <li>✓ Cliente piloto</li>
-                        <li>✓ Papers publicados</li>
-                        <li>✓ Primer cliente pagante</li>
-                    </ul>
-                </div>
-                <div class="card" style="border: 2px solid var(--secondary);">
-                    <div style="font-size: 3rem; font-weight: bold; color: var(--secondary); margin-bottom: 0.5rem;">03</div>
-                    <h4>Escalamiento (Meses 10-18)</h4>
-                    <ul style="text-align: left; list-style: none; margin-top: 1rem;">
-                        <li>✓ Patente completa</li>
-                        <li>✓ 3+ clientes adicionales</li>
-                        <li>✓ Revenue creciendo</li>
-                        <li>✓ Visa application</li>
-                    </ul>
-                </div>
-            </div>
-            <h3 style="text-align: center; margin-top: 3rem; margin-bottom: 2rem;">Timeline Detallado</h3>
-            <div class="timeline">
-                <div class="timeline-item"><div class="timeline-dot"></div><div class="content"><strong>Semanas 1-2: Discovery</strong><br>Validación de mercado, customer interviews</div></div>
-                <div class="timeline-item"><div class="timeline-dot"></div><div class="content"><strong>Semanas 3-8: MVP Development</strong><br>Prototipo funcional, primera instalación piloto</div></div>
-                <div class="timeline-item"><div class="timeline-dot"></div><div class="content"><strong>Semana 12: Patent Filing</strong><br>Patente provisional depositada en USPTO</div></div>
-                <div class="timeline-item"><div class="timeline-dot"></div><div class="content"><strong>Semanas 8-12: First Paying Customer</strong><br>Primer cliente pagante, contrato firmado</div></div>
-                <div class="timeline-item"><div class="timeline-dot"></div><div class="content"><strong>Meses 4-6: Research Papers</strong><br>1-2 papers publicados en revistas técnicas</div></div>
-                <div class="timeline-item"><div class="timeline-dot"></div><div class="content"><strong>Mes 10: Complete Patent</strong><br>Patente completa depositada</div></div>
-                <div class="timeline-item"><div class="timeline-dot"></div><div class="content"><strong>Meses 12-14: Visa Petition</strong><br>Aplicación EB-1A/O-1 con portfolio de evidencia</div></div>
-                <div class="timeline-item"><div class="timeline-dot"></div><div class="content"><strong>Mes 18: Scaling</strong><br>5+ clientes, revenue creciendo, team expandiendo</div></div>
-            </div>
-        </div>
-    </section>
-
-    <section class="light" id="documents">
-        <div class="container">
-            <h2>Documentos Maestros</h2>
-            <p style="text-align: center; color: var(--gray); margin-bottom: 3rem;">Kit completo de 6 documentos para ejecución</p>
-            <div class="grid">
-                <div class="card"><div class="icon">⚡</div><h4>Quick Start</h4><p class="icon" style="font-size: 0.85rem;">1 página</p><p>Primeros pasos, setup AI Copilot, acciones esta semana</p><a href="#" class="btn" style="margin-top: 1rem; width: 100%; text-align: center;">Descargar</a></div>
-                <div class="card"><div class="icon">📊</div><h4>Plan de Negocio</h4><p class="icon" style="font-size: 0.85rem;">4,000 palabras</p><p>Roadmap 18 meses, objetivos, hitos, financiamiento</p><a href="#" class="btn" style="margin-top: 1rem; width: 100%; text-align: center;">Descargar</a></div>
-                <div class="card"><div class="icon">🛡️</div><h4>Outline Patente</h4><p class="icon" style="font-size: 0.85rem;">3,500 palabras</p><p>Guía patente provisional, claims, prior art</p><a href="#" class="btn" style="margin-top: 1rem; width: 100%; text-align: center;">Descargar</a></div>
-                <div class="card"><div class="icon">🤖</div><h4>AI Copilot System</h4><p class="icon" style="font-size: 0.85rem;">5,000 palabras</p><p>Prompt Claude, 6 modos especializados, planning</p><a href="#" class="btn" style="margin-top: 1rem; width: 100%; text-align: center;">Descargar</a></div>
-                <div class="card"><div class="icon">📚</div><h4>Índice Completo</h4><p class="icon" style="font-size: 0.85rem;">5,000 palabras</p><p>Guía maestra, especialistas, FAQs, todo</p><a href="#" class="btn" style="margin-top: 1rem; width: 100%; text-align: center;">Descargar</a></div>
-                <div class="card"><div class="icon">🌐</div><h4>Este Website</h4><p class="icon" style="font-size: 0.85rem;">HTML Responsive</p><p>Versión publicable, compartible, profesional</p><a href="#" class="btn" style="margin-top: 1rem; width: 100%; text-align: center;">Descargar</a></div>
-            </div>
-            <div style="text-align: center; margin-top: 3rem;">
-                <p style="color: var(--gray); margin-bottom: 1rem;">ℹ️ Todos los documentos están disponibles en el paquete descargado</p>
-                <a href="https://drive.google.com" class="btn">Descargar Todo en ZIP</a>
-            </div>
-        </div>
-    </section>
-
-    <section id="resources">
-        <div class="container">
-            <h2>Recursos y Enlaces</h2>
-            <h3 style="margin-top: 2rem;">Herramientas Técnicas</h3>
-            <div class="grid">
-                <div style="background: white; border: 1px solid #ddd; padding: 1.5rem; border-radius: 8px; border-left: 4px solid var(--secondary);"><h4 style="color: var(--primary);">GitHub</h4><p style="color: var(--gray); font-size: 0.95rem; margin-bottom: 1rem;">Control de versiones y documentación del código</p><a href="https://github.com" target="_blank" style="color: var(--secondary); text-decoration: none; font-weight: bold;">Visitar →</a></div>
-                <div style="background: white; border: 1px solid #ddd; padding: 1.5rem; border-radius: 8px; border-left: 4px solid var(--secondary);"><h4 style="color: var(--primary);">PlatformIO</h4><p style="color: var(--gray); font-size: 0.95rem; margin-bottom: 1rem;">Desarrollo de firmware para microcontroladores</p><a href="https://platformio.org" target="_blank" style="color: var(--secondary); text-decoration: none; font-weight: bold;">Visitar →</a></div>
-                <div style="background: white; border: 1px solid #ddd; padding: 1.5rem; border-radius: 8px; border-left: 4px solid var(--secondary);"><h4 style="color: var(--primary);">TensorFlow Lite</h4><p style="color: var(--gray); font-size: 0.95rem; margin-bottom: 1rem;">Machine Learning para edge devices</p><a href="https://www.tensorflow.org/lite" target="_blank" style="color: var(--secondary); text-decoration: none; font-weight: bold;">Visitar →</a></div>
-                <div style="background: white; border: 1px solid #ddd; padding: 1.5rem; border-radius: 8px; border-left: 4px solid var(--secondary);"><h4 style="color: var(--primary);">Grafana</h4><p style="color: var(--gray); font-size: 0.95rem; margin-bottom: 1rem;">Visualización y monitoreo de datos</p><a href="https://grafana.com" target="_blank" style="color: var(--secondary); text-decoration: none; font-weight: bold;">Visitar →</a></div>
-            </div>
-            <h3 style="margin-top: 2rem;">Patentes e IP</h3>
-            <div class="grid">
-                <div style="background: white; border: 1px solid #ddd; padding: 1.5rem; border-radius: 8px; border-left: 4px solid var(--secondary);"><h4 style="color: var(--primary);">Google Patents</h4><p style="color: var(--gray); font-size: 0.95rem; margin-bottom: 1rem;">Búsqueda de patentes y prior art</p><a href="https://patents.google.com" target="_blank" style="color: var(--secondary); text-decoration: none; font-weight: bold;">Visitar →</a></div>
-                <div style="background: white; border: 1px solid #ddd; padding: 1.5rem; border-radius: 8px; border-left: 4px solid var(--secondary);"><h4 style="color: var(--primary);">USPTO</h4><p style="color: var(--gray); font-size: 0.95rem; margin-bottom: 1rem;">US Patent and Trademark Office</p><a href="https://www.uspto.gov" target="_blank" style="color: var(--secondary); text-decoration: none; font-weight: bold;">Visitar →</a></div>
-                <div style="background: white; border: 1px solid #ddd; padding: 1.5rem; border-radius: 8px; border-left: 4px solid var(--secondary);"><h4 style="color: var(--primary);">IEEE Xplore</h4><p style="color: var(--gray); font-size: 0.95rem; margin-bottom: 1rem;">Journals técnicos de renombre internacional</p><a href="https://ieeexplore.ieee.org" target="_blank" style="color: var(--secondary); text-decoration: none; font-weight: bold;">Visitar →</a></div>
-                <div style="background: white; border: 1px solid #ddd; padding: 1.5rem; border-radius: 8px; border-left: 4px solid var(--secondary);"><h4 style="color: var(--primary);">USCIS</h4><p style="color: var(--gray); font-size: 0.95rem; margin-bottom: 1rem;">Información sobre visas EB-1A y O-1</p><a href="https://www.uscis.gov" target="_blank" style="color: var(--secondary); text-decoration: none; font-weight: bold;">Visitar →</a></div>
-            </div>
-        </div>
-    </section>
-
-    <section class="light" id="contact">
-        <div class="container">
-            <h2>Contacto</h2>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center;">
-                <div style="background: var(--light); padding: 2rem; border-radius: 10px;">
-                    <h3>Información de Contacto</h3>
-                    <div style="margin: 1.5rem 0; display: flex; gap: 1rem;">
-                        <div style="font-size: 1.5rem; color: var(--secondary);">📧</div>
-                        <div><strong>Email</strong><br><a href="/cdn-cgi/l/email-protection#680201051128090f1c0d0b00460c0d1e" style="color: var(--secondary); text-decoration: none;"><span class="__cf_email__" data-cfemail="e48e8d899da485839081878cca808192">[email&#160;protected]</span></a></div>
+        <section class="surface" id="project" style="background:var(--surface);">
+            <div class="container">
+                <p class="eyebrow" style="text-align:center;">El Proyecto</p>
+                <h2>Harvest.AI: conectividad híbrida para decisiones reales</h2>
+                <div class="project-layout">
+                    <div class="section-card" style="gap:1.5rem; display:flex; flex-direction:column;">
+                        <div>
+                            <h3>🎯 Problema crítico</h3>
+                            <p>Más de 50K explotaciones en EE. UU. operan sin conectividad confiable. Sin datos no hay riego inteligente, ni detección temprana de plagas.</p>
+                        </div>
+                        <div>
+                            <h3>💡 Harvest.AI</h3>
+                            <p>Nodo IoT autónomo con triple enlace (LoRaWAN → Satélite → Mesh) y procesador AI local que decide cuándo y cómo transmitir. Incluye kit plug-and-play con dashboard visionario.</p>
+                        </div>
+                        <div class="feature-grid">
+                            <div class="feature-card"><span>📡</span><strong>Conectividad adaptativa</strong><p>Failover automático según disponibilidad.</p></div>
+                            <div class="feature-card"><span>🤖</span><strong>Edge AI</strong><p>Inferencias localmente para alertas inmediatas.</p></div>
+                            <div class="feature-card"><span>🔋</span><strong>Ultra low-power</strong><p>Panel solar y firmware optimizado.</p></div>
+                            <div class="feature-card"><span>📊</span><strong>Dashboard accionable</strong><p>KPIs listos para compartir con advisors y clientes.</p></div>
+                        </div>
                     </div>
-                    <div style="margin: 1.5rem 0; display: flex; gap: 1rem;">
-                        <div style="font-size: 1.5rem; color: var(--secondary);">📍</div>
-                        <div><strong>Ubicación</strong><br>South Florida, USA</div>
-                    </div>
-                    <div style="margin: 1.5rem 0; display: flex; gap: 1rem;">
-                        <div style="font-size: 1.5rem; color: var(--secondary);">💼</div>
-                        <div><strong>LinkedIn</strong><br><a href="https://linkedin.com" target="_blank" style="color: var(--secondary); text-decoration: none;">Conectar en LinkedIn</a></div>
+                    <div class="project-visual">
+                        <div>
+                            <span class="eyebrow" style="color: var(--accent);">Impacto esperado</span>
+                            <p class="highlight">+25% eficiencia hídrica</p>
+                            <p style="opacity:0.8;">Gracias a decisiones basadas en datos en tiempo real.</p>
+                        </div>
+                        <div>
+                            <p class="highlight">95% uptime</p>
+                            <p style="opacity:0.8;">Resiliencia diseñada para climas extremos.</p>
+                        </div>
+                        <div>
+                            <p class="highlight">3 objetivos</p>
+                            <p style="opacity:0.8;">Tracción, IP sólida y evidencia migratoria.</p>
+                        </div>
+                        <div>
+                            <img class="mesh-diagram" src="clipart_files/Harvest-AI-Prototype-Mesh_Image_qundjlqundjlqund.png" alt="Diagrama Mesh Harvest.AI">
+                            <p style="opacity:0.8;">Vista del mesh redundante que asegura cobertura aun si falla un canal.</p>
+                        </div>
                     </div>
                 </div>
-                <form id="contactForm">
-                    <div class="form-group"><label for="name">Nombre</label><input type="text" id="name" required></div>
-                    <div class="form-group"><label for="email">Email</label><input type="email" id="email" required></div>
-                    <div class="form-group"><label for="subject">Asunto</label><input type="text" id="subject" required></div>
-                    <div class="form-group"><label for="message">Mensaje</label><textarea id="message" required></textarea></div>
-                    <button type="submit" class="submit-btn">Enviar Mensaje</button>
-                </form>
             </div>
-        </div>
-    </section>
+        </section>
+
+        <section id="documents">
+            <div class="container">
+                <p class="eyebrow" style="text-align:center;">Documentos maestros</p>
+                <h2>Resúmenes accionables + descargas</h2>
+                <div class="documents-grid">
+                    <div class="doc-card">
+                        <div class="doc-tags"><span>AI Copilot</span><span>Prompt</span></div>
+                        <h3>Sistema AI-Copilot</h3>
+                        <p>Prompt maestro para Claude Sonnet 4.5 con 6 modos especializados, checklists semanales y triggers de riesgo.</p>
+                        <ul style="color:var(--muted); padding-left:1rem;">
+                            <li>• Rol "AgTech Mentor" listo para copiar</li>
+                            <li>• Conversaciones prearmadas</li>
+                            <li>• Plan semanal automático</li>
+                        </ul>
+                        <div class="doc-actions">
+                            <a class="btn btn-primary" href="ai-copilot.html">Ver resumen</a>
+                            <a class="btn btn-ghost" href="downloads/AI_Copilot_Jimy_SystemPrompt.txt" download>Descargar TXT</a>
+                        </div>
+                    </div>
+                    <div class="doc-card">
+                        <div class="doc-tags"><span>Negocio</span><span>18 meses</span></div>
+                        <h3>Plan de Negocio</h3>
+                        <p>Roadmap detallado de validación, pilotos, patentes y visa con métricas SMART y presupuestos realistas.</p>
+                        <ul style="color:var(--muted); padding-left:1rem;">
+                            <li>• 3 fases con KPIs</li>
+                            <li>• Financiamiento estimado</li>
+                            <li>• Go/No-Go checkpoints</li>
+                        </ul>
+                        <div class="doc-actions">
+                            <a class="btn btn-primary" href="plan-negocio.html">Ver resumen</a>
+                            <a class="btn btn-ghost" href="downloads/Plan_Negocios_Jimy_AgTech.txt" download>Descargar TXT</a>
+                        </div>
+                    </div>
+                    <div class="doc-card">
+                        <div class="doc-tags"><span>Patente</span><span>IP</span></div>
+                        <h3>Outline Patente Provisional</h3>
+                        <p>Guía legal/técnica que documenta prior art, claims, arquitectura hardware/firmware y checklist previo a USPTO.</p>
+                        <ul style="color:var(--muted); padding-left:1rem;">
+                            <li>• Diferenciador triple-stack</li>
+                            <li>• Componentes detallados</li>
+                            <li>• Recomendaciones para abogado</li>
+                        </ul>
+                        <div class="doc-actions">
+                            <a class="btn btn-primary" href="outline-patente.html">Ver resumen</a>
+                            <a class="btn btn-ghost" href="downloads/Outline_Patente_Provisional_Jimy.txt" download>Descargar TXT</a>
+                        </div>
+                    </div>
+                    <div class="doc-card">
+                        <div class="doc-tags"><span>Índice</span><span>Onboarding</span></div>
+                        <h3>Índice + Guía de Ejecución</h3>
+                        <p>Mapa general de todos los entregables, acciones de los primeros 7 días y rituales semanales/mensuales.</p>
+                        <ul style="color:var(--muted); padding-left:1rem;">
+                            <li>• Checklist de arranque</li>
+                            <li>• Flujo semanal repetible</li>
+                            <li>• Recomendaciones de uso</li>
+                        </ul>
+                        <div class="doc-actions">
+                            <a class="btn btn-primary" href="indice-general.html">Ver resumen</a>
+                            <a class="btn btn-ghost" href="downloads/README_Indice_Jimy.txt" download>Descargar TXT</a>
+                        </div>
+                    </div>
+                </div>
+                <div style="text-align:center; margin-top:2.5rem;">
+                    <a class="btn btn-primary" href="DESCARGAR_ARCHIVOS.html" target="_blank">Centro de descargas completo</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="roadmap" style="background:var(--surface);">
+            <div class="container">
+                <p class="eyebrow" style="text-align:center;">Roadmap 18 meses</p>
+                <h2>De MVP a escala comercial</h2>
+                <div class="roadmap-grid">
+                    <div class="roadmap-card">
+                        <div class="pill" style="background:rgba(24,166,124,0.2);">Meses 1-3</div>
+                        <h4>Validación</h4>
+                        <ul>
+                            <li>✓ 15 entrevistas con crop managers</li>
+                            <li>✓ MVP rústico en campo</li>
+                            <li>✓ Documento de diferenciador técnico</li>
+                        </ul>
+                    </div>
+                    <div class="roadmap-card" style="background:linear-gradient(135deg,#0b3d2c,#18a67c); color:#fff;">
+                        <div class="pill" style="background:rgba(255,255,255,0.2); color:#fff;">Meses 4-9</div>
+                        <h4>Tracción</h4>
+                        <ul>
+                            <li>✓ Patente provisional</li>
+                            <li>✓ Cliente piloto y case study</li>
+                            <li>✓ Papers enviados a IEEE/AgTech</li>
+                        </ul>
+                    </div>
+                    <div class="roadmap-card">
+                        <div class="pill" style="background:rgba(24,166,124,0.2);">Meses 10-18</div>
+                        <h4>Escalamiento</h4>
+                        <ul>
+                            <li>✓ Patente completa y licencias</li>
+                            <li>✓ 3+ clientes pagando</li>
+                            <li>✓ Evidencia EB-1A/O-1 preparada</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="section-card">
+                    <h3>Línea de tiempo detallada</h3>
+                    <div class="timeline">
+                        <div class="timeline-item"><strong>Semanas 1-2:</strong> Discovery intensivo y enfoque en diferenciador.</div>
+                        <div class="timeline-item"><strong>Semanas 3-8:</strong> MVP funcional + primera instalación.</div>
+                        <div class="timeline-item"><strong>Mes 4:</strong> Patente provisional presentada.</div>
+                        <div class="timeline-item"><strong>Mes 6:</strong> Primer paper enviado + piloto activo.</div>
+                        <div class="timeline-item"><strong>Mes 10:</strong> Patente completa y pipeline comercial.</div>
+                        <div class="timeline-item"><strong>Meses 12-14:</strong> Petición de visa lista con evidencia.</div>
+                        <div class="timeline-item"><strong>Mes 18:</strong> Scaling con 5+ clientes pagos.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="gallery">
+            <div class="container">
+                <p class="eyebrow" style="text-align:center;">Assets visuales</p>
+                <h2>Galería Harvest.AI</h2>
+                <p style="text-align:center; color:var(--muted); margin-bottom:1.5rem;">Explora renders del prototipo, dashboard, paneles solares y materiales de go-to-market. Desliza horizontalmente y haz clic para ampliar.</p>
+                <div class="gallery-track">
+                    <button class="gallery-item" data-img="clipart_files/Harvest-AI-Prototype-field_Image_ktvs46ktvs46ktvs.png" data-caption="Prototipo Harvest.AI desplegado en campo">
+                        <figure><img src="clipart_files/Harvest-AI-Prototype-field_Image_ktvs46ktvs46ktvs.png" alt="Prototipo en campo"><figcaption>Prototipo en campo</figcaption></figure>
+                    </button>
+                    <button class="gallery-item" data-img="clipart_files/Harvest-AI-Prototype-Mesh_Image_qundjlqundjlqund.png" data-caption="Visual del mesh redundante">
+                        <figure><img src="clipart_files/Harvest-AI-Prototype-Mesh_Image_qundjlqundjlqund.png" alt="Mesh">
+                            <figcaption>Diagramas de red</figcaption></figure>
+                    </button>
+                    <button class="gallery-item" data-img="clipart_files/Harvest-AI-ad-farmer.png" data-caption="Publicidad orientada al agricultor">
+                        <figure><img src="clipart_files/Harvest-AI-ad-farmer.png" alt="Publicidad">
+                            <figcaption>Campaña farmer</figcaption></figure>
+                    </button>
+                    <button class="gallery-item" data-img="clipart_files/Harvest-AI-Prototype-App-tablet_Image_slddssslddsssldd.png" data-caption="App tablet para monitoreo">
+                        <figure><img src="clipart_files/Harvest-AI-Prototype-App-tablet_Image_slddssslddsssldd.png" alt="App tablet">
+                            <figcaption>App tablet</figcaption></figure>
+                    </button>
+                    <button class="gallery-item" data-img="clipart_files/Harvest-AI-Prototype-Apps_Generated_Image_wfbhzwwfbhzwwfbh.png" data-caption="Bundle de aplicaciones companion">
+                        <figure><img src="clipart_files/Harvest-AI-Prototype-Apps_Generated_Image_wfbhzwwfbhzwwfbh.png" alt="Apps">
+                            <figcaption>Apps companion</figcaption></figure>
+                    </button>
+                    <button class="gallery-item" data-img="clipart_files/Harvest-AI-Prototype-Dashboard_Image_ynxzc8ynxzc8ynxz.png" data-caption="Dashboard de insights">
+                        <figure><img src="clipart_files/Harvest-AI-Prototype-Dashboard_Image_ynxzc8ynxzc8ynxz.png" alt="Dashboard">
+                            <figcaption>Dashboard</figcaption></figure>
+                    </button>
+                    <button class="gallery-item" data-img="clipart_files/Harvest-AI-Prototype-Image_b87qd2b87qd2b87q.png" data-caption="Unidad central Harvest.AI">
+                        <figure><img src="clipart_files/Harvest-AI-Prototype-Image_b87qd2b87qd2b87q.png" alt="Unidad central">
+                            <figcaption>Unidad central</figcaption></figure>
+                    </button>
+                    <button class="gallery-item" data-img="clipart_files/Harvest-AI-Prototype-solar-panel_Image_j2im3mj2im3mj2im.png" data-caption="Panel solar modular">
+                        <figure><img src="clipart_files/Harvest-AI-Prototype-solar-panel_Image_j2im3mj2im3mj2im.png" alt="Panel solar">
+                            <figcaption>Panel solar</figcaption></figure>
+                    </button>
+                    <button class="gallery-item" data-img="clipart_files/Harvest-AI-Prototype-_Image_n19as4n19as4n19a.png" data-caption="Detalles del hardware">
+                        <figure><img src="clipart_files/Harvest-AI-Prototype-_Image_n19as4n19as4n19a.png" alt="Hardware">
+                            <figcaption>Hardware detail</figcaption></figure>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section id="resources">
+            <div class="container">
+                <p class="eyebrow" style="text-align:center;">Recursos clave</p>
+                <h2>Herramientas para ejecutar</h2>
+                <div class="resource-columns">
+                    <div class="resource-card">
+                        <h3>Stack técnico</h3>
+                        <ul style="list-style:none; color:var(--muted); line-height:1.8;">
+                            <li>• GitHub: Repositorio y versiones</li>
+                            <li>• PlatformIO: Desarrollo firmware</li>
+                            <li>• Grafana + InfluxDB: Observabilidad</li>
+                            <li>• TensorFlow Lite: Modelos en edge</li>
+                        </ul>
+                        <a href="https://github.com/startupmiracle/Jimy_AgTech" target="_blank" class="btn btn-primary" style="margin-top:1rem;">Abrir repositorio</a>
+                    </div>
+                    <div class="resource-card">
+                        <h3>Patentes e IP</h3>
+                        <ul style="list-style:none; color:var(--muted); line-height:1.8;">
+                            <li>• Google Patents para prior art</li>
+                            <li>• USPTO para guidelines</li>
+                            <li>• IEEE Xplore para investigación</li>
+                            <li>• Legal counsel especializado en utility patents</li>
+                        </ul>
+                    </div>
+                    <div class="resource-card">
+                        <h3>Visa & Growth</h3>
+                        <ul style="list-style:none; color:var(--muted); line-height:1.8;">
+                            <li>• USCIS: evidencias EB-1A/O-1</li>
+                            <li>• Mentores fundadores EB-1A</li>
+                            <li>• Comunidad AgTech South Florida</li>
+                            <li>• Programa de publicaciones académicas</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" style="background:var(--surface);">
+            <div class="container">
+                <p class="eyebrow" style="text-align:center;">Contacto</p>
+                <h2>Hablemos del siguiente piloto</h2>
+                <div class="contact-grid">
+                    <div class="contact-panel">
+                        <h3>Datos directos</h3>
+                        <p>Email: <a href="mailto:jimy@agtech.dev">jimy@agtech.dev</a></p>
+                        <p>Ubicación: South Florida, USA</p>
+                        <p>LinkedIn: <a href="https://linkedin.com" target="_blank">linkedin.com/in/jimy</a></p>
+                        <p>GitHub: <a href="https://github.com/startupmiracle" target="_blank">@startupmiracle</a></p>
+                    </div>
+                    <form id="contactForm">
+                        <div class="form-group"><label for="name">Nombre</label><input id="name" required></div>
+                        <div class="form-group"><label for="email">Email</label><input id="email" type="email" required></div>
+                        <div class="form-group"><label for="subject">Asunto</label><input id="subject" required></div>
+                        <div class="form-group"><label for="message">Mensaje</label><textarea id="message" required></textarea></div>
+                        <button class="btn btn-primary" type="submit">Enviar mensaje</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
 
     <footer>
         <div class="container">
             <div class="footer-grid">
-                <div class="footer-section">
-                    <h4>Sobre el Proyecto</h4>
-                    <p>Iniciativa de innovación en AgTech para captura de datos remotos. 18 meses hacia traction, patente, publicación e inmigración.</p>
+                <div>
+                    <h4>Harvest.AI</h4>
+                    <p>Proyecto founder-led para instrumentar granjas remotas con IoT híbrido y AI.</p>
                 </div>
-                <div class="footer-section">
-                    <h4>Documentos</h4>
-                    <ul>
-                        <li><a href="#documents">Descargar Kit</a></li>
-                        <li><a href="#roadmap">Ver Roadmap</a></li>
-                        <li><a href="#project">Conocer Proyecto</a></li>
+                <div>
+                    <h4>Secciones</h4>
+                    <ul style="list-style:none; line-height:1.8;">
+                        <li><a href="#project">Proyecto</a></li>
+                        <li><a href="#documents">Documentos</a></li>
+                        <li><a href="#roadmap">Roadmap</a></li>
+                        <li><a href="#gallery">Galería</a></li>
                     </ul>
                 </div>
-                <div class="footer-section">
+                <div>
                     <h4>Recursos</h4>
-                    <ul>
-                        <li><a href="#resources">Herramientas</a></li>
-                        <li><a href="https://patents.google.com">Google Patents</a></li>
-                        <li><a href="https://www.uscis.gov">USCIS</a></li>
+                    <ul style="list-style:none; line-height:1.8;">
+                        <li><a href="https://patents.google.com" target="_blank">Google Patents</a></li>
+                        <li><a href="https://www.uspto.gov" target="_blank">USPTO</a></li>
+                        <li><a href="https://www.uscis.gov" target="_blank">USCIS</a></li>
                     </ul>
                 </div>
-                <div class="footer-section">
-                    <h4>Conectar</h4>
-                    <ul>
-                        <li><a href="#contact">Contacto</a></li>
-                        <li><a href="https://linkedin.com">LinkedIn</a></li>
-                        <li><a href="https://github.com">GitHub</a></li>
+                <div>
+                    <h4>Descargas</h4>
+                    <ul style="list-style:none; line-height:1.8;">
+                        <li><a href="DESCARGAR_ARCHIVOS.html" target="_blank">Centro de descargas</a></li>
+                        <li><a href="downloads/Plan_Negocios_Jimy_AgTech.txt" download>Plan de Negocio TXT</a></li>
+                        <li><a href="downloads/AI_Copilot_Jimy_SystemPrompt.txt" download>AI Copilot TXT</a></li>
                     </ul>
                 </div>
             </div>
-            <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem; text-align: center; color: rgba(255,255,255,0.5);">
-                <p>&copy; 2025 Jimy AgTech. Proyecto de innovación en agricultura de precisión. | Todos los derechos reservados.</p>
-            </div>
+            <p style="text-align:center; margin-top:2rem;">© 2025 Harvest.AI · Innovación agrícola remota</p>
         </div>
     </footer>
 
     <div class="scroll-to-top" id="scrollToTop">↑</div>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    <div class="chat-launcher" id="chatLauncher" title="Habla con el proyecto">💬</div>
+    <div class="chat-drawer" id="chatDrawer">
+        <div class="chat-header">
+            <div>
+                <strong>Chat con Jimy Copilot</strong>
+                <p style="opacity:0.7; font-size:0.85rem;">Pregunta sobre el contenido del sitio</p>
+            </div>
+            <button id="chatClose" style="background:transparent; border:none; color:white; font-size:1.5rem; cursor:pointer;">×</button>
+        </div>
+        <div class="chat-body" id="chatBody">
+            <div class="chat-message bot">👋 Hola, soy el copiloto virtual de Harvest.AI. Hazme una pregunta o usa las sugerencias.</div>
+        </div>
+        <div class="chat-prompts">
+            <button data-question="¿Qué diferencia al stack híbrido?">Stack híbrido</button>
+            <button data-question="¿Cuál es el plan de 18 meses?">Plan 18M</button>
+            <button data-question="¿Cómo puedo acceder a los documentos?">Documentos</button>
+            <button data-question="¿Qué pasos hay para la visa?">Visa EB-1A/O-1</button>
+        </div>
+        <form class="chat-input" id="chatForm">
+            <input type="text" id="chatField" placeholder="Escribe tu pregunta...">
+            <button type="submit">Enviar</button>
+        </form>
+    </div>
+
+    <div class="lightbox" id="lightbox">
+        <div class="lightbox-content">
+            <button class="lightbox-close" id="lightboxClose">×</button>
+            <img id="lightboxImage" alt="Detalle Harvest.AI">
+            <p id="lightboxCaption" style="color:var(--muted);"></p>
+        </div>
+    </div>
+
+    <script>
         const hamburger = document.getElementById('hamburger');
         const navMenu = document.getElementById('navMenu');
         hamburger.addEventListener('click', () => navMenu.classList.toggle('active'));
-        navMenu.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => navMenu.classList.remove('active'));
-        });
+        navMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => navMenu.classList.remove('active')));
 
         const scrollToTopBtn = document.getElementById('scrollToTop');
         window.addEventListener('scroll', () => {
-            scrollToTopBtn.classList.toggle('visible', window.pageYOffset > 300);
+            scrollToTopBtn.classList.toggle('visible', window.scrollY > 200);
         });
-        scrollToTopBtn.addEventListener('click', () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-
+        scrollToTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
+            anchor.addEventListener('click', e => {
+                const target = document.querySelector(anchor.getAttribute('href'));
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
             });
         });
 
-        document.getElem
+        document.getElementById('contactForm').addEventListener('submit', e => {
+            e.preventDefault();
+            alert('Gracias por tu mensaje. Me pondré en contacto muy pronto.');
+            e.target.reset();
+        });
+
+        const chatLauncher = document.getElementById('chatLauncher');
+        const chatDrawer = document.getElementById('chatDrawer');
+        const chatClose = document.getElementById('chatClose');
+        const chatBody = document.getElementById('chatBody');
+        const chatForm = document.getElementById('chatForm');
+        const chatField = document.getElementById('chatField');
+
+        const chatResponses = {
+            '¿Qué diferencia al stack híbrido?': 'Harvest.AI prioriza LoRaWAN por bajo consumo, cambia a satélite IoT cuando detecta caída >5 minutos y mantiene sincronización mesh local. Revisa "El Proyecto" para ver las ventajas del triple-stack.',
+            '¿Cuál es el plan de 18 meses?': 'El roadmap está dividido en Validación (Meses 1-3), Tracción (4-9) y Escalamiento (10-18). Cada fase tiene métricas y entregables. Explora la sección Roadmap para el timeline completo.',
+            '¿Cómo puedo acceder a los documentos?': 'Visita Documentos para leer los resúmenes y descarga los TXT desde cada tarjeta o entra al Centro de Descargas.',
+            '¿Qué pasos hay para la visa?': 'La estrategia migratoria se detalla en el Plan de Negocio: consulta a abogado en Mes 1, documenta logros (patentes, clientes, papers) y prepara la evidencia EB-1A/O-1 entre los meses 12-14.'
+        };
+
+        function toggleChat(open) {
+            if (open) {
+                chatDrawer.classList.add('open');
+                chatField.focus();
+            } else {
+                chatDrawer.classList.remove('open');
+            }
+        }
+        chatLauncher.addEventListener('click', () => toggleChat(true));
+        chatClose.addEventListener('click', () => toggleChat(false));
+
+        document.querySelectorAll('.chat-prompts button').forEach(btn => {
+            btn.addEventListener('click', () => {
+                sendMessage(btn.dataset.question);
+            });
+        });
+
+        function appendMessage(text, sender = 'bot') {
+            const bubble = document.createElement('div');
+            bubble.className = `chat-message ${sender}`;
+            bubble.innerHTML = text;
+            chatBody.appendChild(bubble);
+            chatBody.scrollTop = chatBody.scrollHeight;
+        }
+
+        function sendMessage(message) {
+            if (!message.trim()) return;
+            appendMessage(message, 'user');
+            const fallback = 'Puedo guiarte por cada sección. Visita los resúmenes de documentos o el roadmap para más contexto.';
+            const response = chatResponses[message] || fallback;
+            appendMessage(response, 'bot');
+        }
+
+        chatForm.addEventListener('submit', e => {
+            e.preventDefault();
+            sendMessage(chatField.value);
+            chatField.value = '';
+        });
+
+        const galleryItems = document.querySelectorAll('.gallery-item');
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImage = document.getElementById('lightboxImage');
+        const lightboxCaption = document.getElementById('lightboxCaption');
+        const lightboxClose = document.getElementById('lightboxClose');
+
+        galleryItems.forEach(item => {
+            item.addEventListener('click', () => {
+                lightboxImage.src = item.dataset.img;
+                lightboxCaption.textContent = item.dataset.caption || '';
+                lightbox.classList.add('open');
+            });
+        });
+
+        lightboxClose.addEventListener('click', () => lightbox.classList.remove('open'));
+        lightbox.addEventListener('click', e => {
+            if (e.target === lightbox) lightbox.classList.remove('open');
+        });
+    </script>
+</body>
+</html>
