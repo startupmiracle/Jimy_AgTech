@@ -50,25 +50,42 @@
             font-weight: 600;
             letter-spacing: 0.02em;
         }
-        .logo span:last-child { opacity: 0.8; font-size: 0.85rem; font-weight: 400; }
+        .logo span:last-child { opacity: 0.8; font-size: 0.9rem; font-weight: 500; line-height: 1.2; }
         .nav-menu {
             list-style: none;
             display: flex;
             gap: 1.5rem;
             color: rgba(255,255,255,0.9);
         }
+        .nav-menu li { position: relative; }
         .nav-menu a {
             text-decoration: none;
             font-weight: 500;
             transition: color 0.2s ease;
         }
         .nav-menu a:hover { color: var(--accent); }
+        .nav-menu .submenu {
+            position: absolute;
+            top: 140%;
+            left: 0;
+            background: rgba(7,30,21,0.95);
+            padding: 0.75rem 1rem;
+            border-radius: 12px;
+            display: none;
+            flex-direction: column;
+            gap: 0.4rem;
+            min-width: 180px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.35);
+        }
+        .nav-menu li:hover > .submenu { display: flex; }
+        .submenu a { color: rgba(255,255,255,0.9); font-size: 0.9rem; }
         .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
         .hamburger span { width: 25px; height: 3px; background: #fff; border-radius: 2px; }
         @media (max-width: 900px) {
             .nav-menu { position: absolute; inset: 70px 1rem auto 1rem; flex-direction: column; padding: 1.5rem; background: rgba(11,61,44,0.95); border-radius: 12px; display: none; }
             .nav-menu.active { display: flex; }
             .hamburger { display: flex; }
+            .nav-menu .submenu { position: static; box-shadow: none; padding: 0.5rem 0; }
         }
         .container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
         section { padding: 4.5rem 0; }
@@ -137,6 +154,8 @@
         .roadmap-card { border-radius: 20px; padding: 1.8rem; background: var(--card); box-shadow: 0 20px 50px rgba(15,30,21,0.08); border: 1px solid rgba(24,166,124,0.2); }
         .roadmap-card h4 { font-size: 1.1rem; margin: 0.5rem 0 1rem; }
         .roadmap-card ul { list-style: none; color: var(--muted); line-height: 1.6; }
+        .roadmap-card.highlight { background: linear-gradient(135deg,#0f2f24,#1b5c40); color: white; border-color: rgba(255,255,255,0.2); }
+        .roadmap-card.highlight ul { color: rgba(255,255,255,0.9); }
         .timeline { position: relative; padding-left: 2rem; border-left: 2px dashed rgba(24,166,124,0.6); margin-left: 0.5rem; }
         .timeline-item { margin-bottom: 1.5rem; }
         .timeline-item::before { content: ''; width: 10px; height: 10px; border-radius: 50%; background: var(--secondary); position: absolute; left: -6px; margin-top: 0.4rem; }
@@ -152,20 +171,6 @@
         .lightbox-content { background: white; padding: 1rem; border-radius: 18px; max-width: 90vw; max-height: 90vh; display: flex; flex-direction: column; gap: 0.8rem; }
         .lightbox-content img { max-width: 80vw; max-height: 70vh; object-fit: contain; border-radius: 14px; }
         .lightbox-close { align-self: flex-end; border: none; background: transparent; font-size: 1.8rem; cursor: pointer; }
-        .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 2rem; }
-        .contact-panel { background: #0b3d2c; color: white; border-radius: 22px; padding: 2rem; }
-        .contact-panel a { color: var(--accent); }
-        form { background: var(--card); padding: 2rem; border-radius: 22px; box-shadow: 0 30px 50px rgba(15,30,21,0.08); }
-        .form-group { margin-bottom: 1rem; display: flex; flex-direction: column; gap: 0.4rem; }
-        input, textarea {
-            border: 1px solid rgba(15,30,21,0.1);
-            border-radius: 12px;
-            padding: 0.9rem 1rem;
-            font-family: inherit;
-            font-size: 1rem;
-            background: white;
-        }
-        textarea { min-height: 120px; resize: vertical; }
         footer { background: #071e15; color: rgba(255,255,255,0.7); padding: 3rem 0 2rem; }
         .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; }
         .footer-bottom { text-align: center; margin-top: 2.5rem; line-height: 1.8; color: rgba(255,255,255,0.8); }
@@ -270,19 +275,24 @@
                 <span>🌱</span>
                 <div>
                     Harvest.AI
-                    <span>Por Jimmy Fernandez · Remote Data Capture</span>
+                    <span>AgTech Data Capture</span>
                 </div>
             </div>
             <ul class="nav-menu" id="navMenu">
                 <li><a href="#home">Inicio</a></li>
                 <li><a href="#about">Fundador</a></li>
-                <li><a href="#project">Proyecto</a></li>
-                <li><a href="#design">Diseño</a></li>
-                <li><a href="#documents">Documentos</a></li>
-                <li><a href="#roadmap">Roadmap</a></li>
+                <li class="has-submenu">
+                    <a href="#project">Proyecto</a>
+                    <ul class="submenu">
+                        <li><a href="#project">Visión</a></li>
+                        <li><a href="#design">Diseño & Componentes</a></li>
+                        <li><a href="#documents">Documentos</a></li>
+                        <li><a href="#roadmap">Roadmap</a></li>
+                    </ul>
+                </li>
                 <li><a href="#gallery">Galería</a></li>
                 <li><a href="#resources">Recursos</a></li>
-                <li><a href="#contact">Contacto</a></li>
+                <li><a href="https://startupmiracle.com/" target="_blank" rel="noopener">Startup Miracle</a></li>
             </ul>
             <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
         </nav>
@@ -310,10 +320,6 @@
                     <div class="hero-visual">
                         <span class="badge">Prototipo Harvest.AI</span>
                         <img src="clipart_files/Harvest-AI-Prototype-field_Image_ktvs46ktvs46ktvs.png" alt="Harvest.AI prototipo en campo">
-                        <div class="hero-ad">
-                            <img src="clipart_files/Harvest-AI-ad-farmer.png" alt="Campaña de publicidad Harvest.AI">
-                            <p style="font-size:0.75rem; margin-top:0.4rem; color:#0b3d2c; font-weight:600;">Campaña piloto · Farmer-facing</p>
-                        </div>
                     </div>
                 </div>
                 <div class="stat-grid">
@@ -418,7 +424,7 @@
                         </ul>
                         <div style="display:flex; flex-wrap:wrap; gap:0.6rem;">
                             <a class="btn btn-primary" href="web_files/Lista_componentes_HARVESTAI.md" download>Descargar lista</a>
-                            <a class="btn btn-ghost" href="https://nanobanana.ai" target="_blank">Generar renders en NanoBanana</a>
+                            <a class="btn btn-ghost" href="https://gemini.google.com/" target="_blank" rel="noopener">Generar renders en Gemini</a>
                         </div>
                     </div>
                     <div class="section-card" style="background:white;">
@@ -513,7 +519,7 @@
                             <li>✓ Documento de diferenciador técnico</li>
                         </ul>
                     </div>
-                    <div class="roadmap-card" style="background:linear-gradient(135deg,#0b3d2c,#18a67c); color:#fff;">
+                    <div class="roadmap-card highlight">
                         <div class="pill" style="background:rgba(255,255,255,0.2); color:#fff;">Meses 4-9</div>
                         <h4>Tracción</h4>
                         <ul>
@@ -629,28 +635,6 @@
             </div>
         </section>
 
-        <section id="contact" style="background:var(--surface);">
-            <div class="container">
-                <p class="eyebrow" style="text-align:center;">Contacto</p>
-                <h2>Hablemos del siguiente piloto</h2>
-                <div class="contact-grid">
-                    <div class="contact-panel">
-                        <h3>Datos directos</h3>
-                        <p>Email: <a href="mailto:jimy@agtech.dev">jimy@agtech.dev</a></p>
-                        <p>Ubicación: South Florida, USA</p>
-                        <p>LinkedIn: <a href="https://linkedin.com" target="_blank">linkedin.com/in/jimy</a></p>
-                        <p>GitHub: <a href="https://github.com/startupmiracle" target="_blank">@startupmiracle</a></p>
-                    </div>
-                    <form id="contactForm">
-                        <div class="form-group"><label for="name">Nombre</label><input id="name" required></div>
-                        <div class="form-group"><label for="email">Email</label><input id="email" type="email" required></div>
-                        <div class="form-group"><label for="subject">Asunto</label><input id="subject" required></div>
-                        <div class="form-group"><label for="message">Mensaje</label><textarea id="message" required></textarea></div>
-                        <button class="btn btn-primary" type="submit">Enviar mensaje</button>
-                    </form>
-                </div>
-            </div>
-        </section>
     </main>
 
     <footer>
@@ -747,12 +731,6 @@
                     target.scrollIntoView({ behavior: 'smooth' });
                 }
             });
-        });
-
-        document.getElementById('contactForm').addEventListener('submit', e => {
-            e.preventDefault();
-            alert('Gracias por tu mensaje. Me pondré en contacto muy pronto.');
-            e.target.reset();
         });
 
         const chatLauncher = document.getElementById('chatLauncher');
