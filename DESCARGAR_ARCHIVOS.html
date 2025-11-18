@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Centro de Descargas - Jimy AgTech Project</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #2d5016 0%, #558b2f 100%);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            padding: 3rem;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+        h1 {
+            color: #2d5016;
+            text-align: center;
+            margin-bottom: 1rem;
+            font-size: 2.5rem;
+        }
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+        }
+        .file-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        .file-card {
+            background: #f9f9f9;
+            border: 2px solid #7cb342;
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        .file-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            border-color: #2d5016;
+        }
+        .file-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        .file-name {
+            color: #2d5016;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+        .file-size {
+            color: #999;
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+        }
+        .file-description {
+            color: #666;
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+        .download-btn {
+            background: linear-gradient(135deg, #7cb342, #558b2f);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+        .download-btn:hover {
+            background: linear-gradient(135deg, #558b2f, #2d5016);
+            transform: scale(1.05);
+        }
+        .info-box {
+            background: #f0f7e4;
+            border-left: 4px solid #7cb342;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 5px;
+            color: #2d5016;
+        }
+        .info-box strong {
+            color: #2d5016;
+        }
+        .download-all {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        .download-all .btn-large {
+            background: linear-gradient(135deg, #2d5016, #558b2f);
+            color: white;
+            padding: 1.2rem 3rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+        .download-all .btn-large:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+        .instructions {
+            background: white;
+            border: 2px dashed #7cb342;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-top: 3rem;
+        }
+        .instructions h3 {
+            color: #2d5016;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+        .instructions ol {
+            margin-left: 2rem;
+            color: #666;
+            line-height: 1.8;
+        }
+        .instructions li {
+            margin-bottom: 0.8rem;
+        }
+        .important {
+            background: #fff9e6;
+            border: 2px solid #ffc107;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+            color: #8b6f00;
+        }
+        .important strong {
+            color: #8b6f00;
+        }
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid #ddd;
+            color: #999;
+            font-size: 0.9rem;
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding: 1.5rem;
+            }
+            h1 {
+                font-size: 1.8rem;
+            }
+            .file-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🌾 Centro de Descargas</h1>
+        <p class="subtitle">Proyecto AgTech - Jimy | Todo lo que necesitas en un lugar</p>
+
+        <div class="info-box">
+            <strong>ℹ️ Información importante:</strong> Todos los archivos están listos para descargar. 
+            Si necesitas descargar TODO junto, usa el botón "Descargar Todo" abajo.
+        </div>
+
+        <div class="file-grid">
+            <!-- WEBSITE -->
+            <div class="file-card">
+                <div class="file-icon">🌐</div>
+                <div class="file-name">Jimy AgTech Website</div>
+                <div class="file-size">28 KB | HTML Completo</div>
+                <div class="file-description">Website profesional, responsive y listo para publicar. Incluye todas las secciones del proyecto.</div>
+                <button class="download-btn" onclick="downloadFile('jimy_agtech_website.html')">Descargar HTML</button>
+            </div>
+
+            <!-- QUICKSTART -->
+            <div class="file-card">
+                <div class="file-icon">⚡</div>
+                <div class="file-name">Quick Start Guide</div>
+                <div class="file-size">10 KB | 1 Página</div>
+                <div class="file-description">Primeros pasos, setup AI Copilot, acciones para esta semana. ¡EMPIEZA AQUÍ!</div>
+                <button class="download-btn" onclick="downloadFile('QUICKSTART_Jimy.md')">Descargar MD</button>
+            </div>
+
+            <!-- PLAN NEGOCIO -->
+            <div class="file-card">
+                <div class="file-icon">📊</div>
+                <div class="file-name">Plan de Negocio</div>
+                <div class="file-size">8.1 KB | 4,000 palabras</div>
+                <div class="file-description">Roadmap completo 18 meses, objetivos, hitos, financiamiento, riesgos y mitigación.</div>
+                <button class="download-btn" onclick="downloadFile('Plan_Negocios_Jimy_AgTech.md')">Descargar MD</button>
+            </div>
+
+            <!-- PATENTE -->
+            <div class="file-card">
+                <div class="file-icon">🛡️</div>
+                <div class="file-name">Outline Patente Provisional</div>
+                <div class="file-size">12.9 KB | 3,500 palabras</div>
+                <div class="file-description">Guía legal y técnica para patente. Claims, prior art, checklist pre-deposición.</div>
+                <button class="download-btn" onclick="downloadFile('Outline_Patente_Provisional_Jimy.md')">Descargar MD</button>
+            </div>
+
+            <!-- AI COPILOT -->
+            <div class="file-card">
+                <div class="file-icon">🤖</div>
+                <div class="file-name">AI Copilot System</div>
+                <div class="file-size">18.6 KB | 5,000 palabras</div>
+                <div class="file-description">Prompt para Claude Sonnet 4.5, 6 modos especializados, weekly planning, monthly checkpoints.</div>
+                <button class="download-btn" onclick="downloadFile('AI_Copilot_Jimy_SystemPrompt.md')">Descargar MD</button>
+            </div>
+
+            <!-- ÍNDICE -->
+            <div class="file-card">
+                <div class="file-icon">📚</div>
+                <div class="file-name">Índice Completo (README)</div>
+                <div class="file-size">14.8 KB | 5,000 palabras</div>
+                <div class="file-description">Guía maestra, implementación, especialistas a contactar, FAQs, crisis triggers.</div>
+                <button class="download-btn" onclick="downloadFile('README_Indice_Jimy.md')">Descargar MD</button>
+            </div>
+
+            <!-- INSTRUCCIONES WEBSITE -->
+            <div class="file-card">
+                <div class="file-icon">📖</div>
+                <div class="file-name">Instrucciones Publicar Web</div>
+                <div class="file-size">6 KB | Paso a paso</div>
+                <div class="file-description">5 opciones GRATIS para publicar website (GitHub Pages, Netlify, Vercel, etc.)</div>
+                <button class="download-btn" onclick="downloadFile('INSTRUCCIONES_PUBLICAR_WEBSITE.md')">Descargar MD</button>
+            </div>
+        </div>
+
+        <div class="download-all">
+            <button class="btn-large" onclick="downloadAllAsZip()">📦 DESCARGAR TODO (ZIP)</button>
+            <p style="color: #666; margin-top: 1rem; font-size: 0.9rem;">Descarga todos los archivos en un ZIP comprimido</p>
+        </div>
+
+        <div class="important">
+            <strong>⚠️ Si el botón "Descargar Todo" no funciona:</strong><br><br>
+            Descarga cada archivo individualmente con los botones de arriba. 
+            Son solo 7 archivos pequeños (total ~105 KB).
+        </div>
+
+        <div class="instructions">
+            <h3>📋 Cómo usar los documentos</h3>
+            <ol>
+                <li><strong>Hoy:</strong> Lee QUICKSTART_Jimy.md (15 minutos)</li>
+                <li><strong>Hoy:</strong> Descarga jimy_agtech_website.html y publica en GitHub Pages</li>
+                <li><strong>Esta semana:</strong> Lee Plan_Negocios_Jimy_AgTech.md (1 hora)</li>
+                <li><strong>Semana 1:</strong> Setup AI_Copilot_Jimy_SystemPrompt.md en Claude.ai</li>
+                <li><strong>Semana 2:</strong> Usa los otros documentos como referencia mientras ejecutas</li>
+            </ol>
+        </div>
+
+        <div class="info-box">
+            <strong>💡 Consejo:</strong> Guarda todos los archivos en una carpeta llamada "Jimy AgTech Project" en tu computadora para mantener todo organizado.
+        </div>
+
+        <footer>
+            <p>Centro de Descargas | Proyecto Jimy AgTech | Noviembre 2025</p>
+            <p>Todos los archivos están listos. ¡A comenzar el proyecto!</p>
+        </footer>
+    </div>
+
+    <script>
+        function downloadFile(filename) {
+            // Crear un elemento link temporal
+            const link = document.createElement('a');
+            link.href = filename; // El navegador intentará descargar desde la URL actual + filename
+            link.download = filename;
+            
+            // Intentar descargar
+            link.click();
+            
+            // Alternativa si no funciona:
+            alert('Si el archivo no descarga automáticamente, haz clic derecho en el botón y selecciona "Guardar enlace como..."');
+        }
+
+        function downloadAllAsZip() {
+            alert('Los archivos pueden descargarse individualmente con los botones de arriba.\n\nSi necesitas un ZIP, puedes:\n1. Descargar cada archivo (7 botones arriba)\n2. O clonar el repositorio de GitHub que contiene todo');
+        }
+
+        // Mostrar mensaje si está offline
+        window.addEventListener('offline', function() {
+            alert('Sin conexión a internet. Este centro de descargas requiere internet para funcionar.');
+        });
+    </script>
+</body>
+</html>
